@@ -4,6 +4,11 @@
  */
 package Frames;
 
+import KoneksiDB.Global;
+import KoneksiDB.JanjiDB;
+import KoneksiDB.MoodDB;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Edella
@@ -11,27 +16,20 @@ package Frames;
 public class janji extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(janji.class.getName());
-
+    private JanjiDB database_janji;
+    private MoodDB database_mood;
     /**
      * Creates new form janji
      */
     public janji() {
         initComponents();
         
-       // Ambil ukuran layar user (monitor)
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        database_janji = new JanjiDB();
+        database_mood = new MoodDB();
+        
+        setUkuranLokasi();
+        loadCard();
         this.pack();
-        
-        int frameWidth = this.getSize().width;
-        System.out.println(frameWidth);
-        System.out.println(this.getSize().height);
-
-        // Hitung posisi X agar mepet ke kanan
-        int x = screenSize.width - frameWidth;
-        int y = 0; // 0 berarti mepet ke atas
-
-        this.setLocation(x, y);
-        
     }
 
     /**
@@ -52,6 +50,7 @@ public class janji extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        P_CardFlow = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -110,40 +109,25 @@ public class janji extends javax.swing.JFrame {
         Navbar.add(jPanel1);
 
         jPanel3.setOpaque(false);
+        jPanel3.setPreferredSize(new java.awt.Dimension(400, 330));
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel4.setMaximumSize(new java.awt.Dimension(499, 30));
+        jPanel4.setMaximumSize(new java.awt.Dimension(499, 600));
         jPanel4.setOpaque(false);
         jPanel4.setPreferredSize(new java.awt.Dimension(85, 30));
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 5));
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("27 Mei 2026");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        jPanel4.add(jLabel2);
 
         jPanel3.add(jPanel4);
+
+        P_CardFlow.setPreferredSize(new java.awt.Dimension(400, 0));
+        jPanel3.add(P_CardFlow);
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(null);
@@ -200,16 +184,16 @@ public class janji extends javax.swing.JFrame {
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackgroundLayout.createSequentialGroup()
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
         BackgroundLayout.setVerticalGroup(
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
                 .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -256,10 +240,60 @@ public class janji extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new janji().setVisible(true));
     }
+    
+    private void loadCard() {
+
+        ResultSet rs = database_janji.tampilJanji();
+
+        try {
+
+            P_CardFlow.removeAll();
+
+            while (rs.next()) {
+                System.out.println(rs.getString("appointment"));
+
+                P_CardJanji card = new P_CardJanji();
+
+                card.setTitle(
+                    rs.getString("appointment")
+                );
+
+                card.setDate(
+                    rs.getDate("date").toString()
+                );
+
+                P_CardFlow.add(card);
+            }
+
+            P_CardFlow.revalidate();
+            P_CardFlow.repaint();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+    }
+    
+    private void setUkuranLokasi(){
+        // Ambil ukuran layar user (monitor)
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        this.pack();
+        
+        int frameWidth = this.getSize().width;
+        System.out.println(frameWidth);
+        System.out.println(this.getSize().height);
+
+        // Hitung posisi X agar mepet ke kanan
+        int x = screenSize.width - frameWidth;
+        int y = 0; // 0 berarti mepet ke atas
+
+        this.setLocation(x, y);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
     private javax.swing.JPanel Navbar;
+    private javax.swing.JPanel P_CardFlow;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
