@@ -4,7 +4,9 @@
  */
 package Frames;
 
+import KoneksiDB.Global;
 import java.awt.Color;
+import java.time.LocalDate;
 import javax.swing.BorderFactory;
 
 /**
@@ -12,7 +14,7 @@ import javax.swing.BorderFactory;
  * @author Edella
  */
 public class P_Calendar extends javax.swing.JPanel {
-
+    private boolean isActive = true;
     /**
      * Creates new form P_Calendar
      */
@@ -27,6 +29,7 @@ public class P_Calendar extends javax.swing.JPanel {
     public void setGray(){
         Button.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));  
         Number.setForeground(Color.LIGHT_GRAY);
+        isActive = false;
     }
 
     /**
@@ -94,7 +97,22 @@ public class P_Calendar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        System.out.println(Number.getText());
+        if(isActive){
+            try {
+                int tglAngka = Integer.parseInt(Number.getText());
+               
+                LocalDate sekarang = LocalDate.now();
+                int tahunSekarang = sekarang.getYear();
+                int bulanSekarang = sekarang.getMonthValue();
+                
+                Global.tanggal = String.format("%d-%02d-%02d", tahunSekarang, bulanSekarang, tglAngka);
+                
+            } catch (NumberFormatException e) {
+                System.out.println("Input tanggal tidak valid!");
+            }
+            janji j_form = new janji();
+            j_form.setVisible(true);
+            }
     }//GEN-LAST:event_formMouseClicked
 
 

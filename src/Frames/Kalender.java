@@ -206,8 +206,9 @@ public class Kalender extends javax.swing.JFrame {
         );
 
         BTN_Setting.setBackground(new java.awt.Color(0, 0, 0));
-        BTN_Setting.setForeground(new java.awt.Color(0, 0, 0));
-        BTN_Setting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Plus.png"))); // NOI18N
+        BTN_Setting.setFont(new java.awt.Font("Segoe UI Emoji", 0, 15)); // NOI18N
+        BTN_Setting.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_Setting.setText("➕");
         BTN_Setting.addActionListener(this::BTN_SettingActionPerformed);
 
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);

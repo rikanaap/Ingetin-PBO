@@ -8,6 +8,9 @@ import KoneksiDB.Global;
 import KoneksiDB.JanjiDB;
 import KoneksiDB.MoodDB;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  *
@@ -49,7 +52,7 @@ public class janji extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        L_Tanggal = new javax.swing.JLabel();
         P_CardFlow3 = new javax.swing.JScrollPane();
         P_CardFlow = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -120,12 +123,12 @@ public class janji extends javax.swing.JFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(85, 30));
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 5));
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("27 Mei 2026");
-        jPanel4.add(jLabel2);
+        L_Tanggal.setBackground(new java.awt.Color(0, 0, 0));
+        L_Tanggal.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
+        L_Tanggal.setForeground(new java.awt.Color(0, 0, 0));
+        L_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        L_Tanggal.setText("27 Mei 2026");
+        jPanel4.add(L_Tanggal);
 
         jPanel3.add(jPanel4);
 
@@ -255,6 +258,7 @@ public class janji extends javax.swing.JFrame {
     private void loadCard() {
 
         ResultSet rs = database_janji.tampilJanji();
+        L_Tanggal.setText(this.formatKeHariBulan(Global.tanggal));
 
         try {
 
@@ -285,6 +289,17 @@ public class janji extends javax.swing.JFrame {
         }
     }
     
+    public String formatKeHariBulan(String tanggalInput) {
+        try {
+            LocalDate tanggal = LocalDate.parse(tanggalInput);
+            DateTimeFormatter formatterBaru = DateTimeFormatter.ofPattern("d MMM", Locale.ENGLISH);
+            return tanggal.format(formatterBaru);
+        } catch (Exception e) {
+            System.out.println("Gagal convert tanggal: " + e.getMessage());
+            return tanggalInput; // Kembalikan teks asli jika gagal parse
+        }
+    }
+    
     private void setUkuranLokasi(){
         // Ambil ukuran layar user (monitor)
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -303,13 +318,13 @@ public class janji extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
+    private javax.swing.JLabel L_Tanggal;
     private javax.swing.JPanel Navbar;
     private javax.swing.JPanel P_CardFlow;
     private javax.swing.JScrollPane P_CardFlow3;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
