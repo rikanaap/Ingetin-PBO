@@ -50,6 +50,7 @@ public class janji extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        P_CardFlow3 = new javax.swing.JScrollPane();
         P_CardFlow = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
@@ -69,7 +70,7 @@ public class janji extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(400, 300));
         setSize(new java.awt.Dimension(0, 0));
 
-        Background.setBackground(new java.awt.Color(234, 227, 227));
+        Background.setBackground(new java.awt.Color(234, 226, 226));
         Background.setMaximumSize(new java.awt.Dimension(400, 330));
         Background.setMinimumSize(new java.awt.Dimension(400, 330));
         Background.setPreferredSize(new java.awt.Dimension(400, 330));
@@ -109,8 +110,10 @@ public class janji extends javax.swing.JFrame {
         Navbar.add(jPanel1);
 
         jPanel3.setOpaque(false);
-        jPanel3.setPreferredSize(new java.awt.Dimension(400, 330));
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
+        jPanel3.setPreferredSize(new java.awt.Dimension(400, 200));
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout();
+        flowLayout2.setAlignOnBaseline(true);
+        jPanel3.setLayout(flowLayout2);
 
         jPanel4.setMaximumSize(new java.awt.Dimension(499, 600));
         jPanel4.setOpaque(false);
@@ -126,10 +129,18 @@ public class janji extends javax.swing.JFrame {
 
         jPanel3.add(jPanel4);
 
-        P_CardFlow.setPreferredSize(new java.awt.Dimension(400, 0));
+        P_CardFlow3.setBackground(new java.awt.Color(234, 226, 226));
+        P_CardFlow3.setOpaque(true);
+        P_CardFlow3.setPreferredSize(new java.awt.Dimension(400, 150));
+        jPanel3.add(P_CardFlow3);
+
+        P_CardFlow.setBackground(new java.awt.Color(234, 226, 226));
+        P_CardFlow.setMinimumSize(new java.awt.Dimension(400, 200));
+        P_CardFlow.setPreferredSize(new java.awt.Dimension(400, 10));
         jPanel3.add(P_CardFlow);
 
         jPanel2.setOpaque(false);
+        jPanel2.setPreferredSize(new java.awt.Dimension(400, 200));
         jPanel2.setLayout(null);
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
@@ -143,7 +154,7 @@ public class janji extends javax.swing.JFrame {
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton3.addActionListener(this::jButton3ActionPerformed);
         jPanel2.add(jButton3);
-        jButton3.setBounds(290, 150, 98, 96);
+        jButton3.setBounds(290, 100, 98, 96);
 
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 0, 88));
@@ -153,15 +164,15 @@ public class janji extends javax.swing.JFrame {
         jLabel4.setMinimumSize(new java.awt.Dimension(270, 21));
         jLabel4.setRequestFocusEnabled(false);
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(180, 70, 110, 40);
+        jLabel4.setBounds(180, 20, 110, 40);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Bubble3.png"))); // NOI18N
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(160, 60, 139, 75);
+        jLabel3.setBounds(160, 10, 139, 75);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Janji.png"))); // NOI18N
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(20, 100, 144, 144);
+        jLabel1.setBounds(20, 50, 144, 144);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -174,7 +185,7 @@ public class janji extends javax.swing.JFrame {
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(this::jButton2ActionPerformed);
         jPanel2.add(jButton2);
-        jButton2.setBounds(190, 150, 98, 96);
+        jButton2.setBounds(190, 100, 98, 96);
 
         jPanel3.add(jPanel2);
 
@@ -193,7 +204,7 @@ public class janji extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
                 .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,7 +215,7 @@ public class janji extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -247,7 +258,7 @@ public class janji extends javax.swing.JFrame {
 
         try {
 
-            P_CardFlow.removeAll();
+            P_CardFlow3.removeAll();
 
             while (rs.next()) {
                 System.out.println(rs.getString("appointment"));
@@ -262,11 +273,11 @@ public class janji extends javax.swing.JFrame {
                     rs.getDate("date").toString()
                 );
 
-                P_CardFlow.add(card);
+                P_CardFlow3.add(card);
             }
 
-            P_CardFlow.revalidate();
-            P_CardFlow.repaint();
+            P_CardFlow3.revalidate();
+            P_CardFlow3.repaint();
 
         } catch (Exception e) {
 
@@ -294,6 +305,7 @@ public class janji extends javax.swing.JFrame {
     private javax.swing.JPanel Background;
     private javax.swing.JPanel Navbar;
     private javax.swing.JPanel P_CardFlow;
+    private javax.swing.JScrollPane P_CardFlow3;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
