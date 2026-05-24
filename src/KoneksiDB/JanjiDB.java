@@ -56,7 +56,7 @@ public class JanjiDB {
 
         try {
 
-            String sql = "SELECT * FROM janji";
+            String sql = "SELECT janji.*, mood.icon AS icon FROM janji JOIN mood ON janji.id_mood = mood.id_mood";
 
             PreparedStatement ps = con.prepareStatement(sql);
 

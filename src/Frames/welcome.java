@@ -17,6 +17,7 @@ public class welcome extends javax.swing.JFrame {
      */
     public welcome() {
         initComponents();
+        setUkuranLokasi();
     }
 
     /**
@@ -41,6 +42,7 @@ public class welcome extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Welcome Ingetin");
+        setAlwaysOnTop(true);
 
         jPanel1.setBackground(new java.awt.Color(233, 225, 225));
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 330));
@@ -53,9 +55,9 @@ public class welcome extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
         jLabel6.setText("Dia bakal jadi alarm pengingat kamu!");
 
-        tambah_ingatan.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        tambah_ingatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Plus.png"))); // NOI18N
-        tambah_ingatan.setText(" Tambah Ingatan");
+        tambah_ingatan.setFont(new java.awt.Font("Segoe UI Emoji", 1, 15)); // NOI18N
+        tambah_ingatan.setText("➕ Tambah Ingatan");
+        tambah_ingatan.setToolTipText("");
         tambah_ingatan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tambah_ingatanMouseClicked(evt);
@@ -94,24 +96,26 @@ public class welcome extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel6)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(103, 103, 103)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(tambah_ingatan)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel6)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(103, 103, 103)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(jLabel5)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(tambah_ingatan)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +123,7 @@ public class welcome extends javax.swing.JFrame {
                 .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(222, 222, 222))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -129,9 +133,9 @@ public class welcome extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jLabel5)
-                        .addGap(27, 27, 27)
-                        .addComponent(tambah_ingatan)
-                        .addContainerGap(36, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(tambah_ingatan, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,7 +155,9 @@ public class welcome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tambah_ingatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambah_ingatanActionPerformed
-        // TODO add your handling code here:
+        Kalender F_Kalender = new Kalender();
+        F_Kalender.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_tambah_ingatanActionPerformed
 
     private void tambah_ingatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tambah_ingatanMouseClicked
@@ -182,6 +188,22 @@ public class welcome extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new welcome().setVisible(true));
+    }
+    
+    private void setUkuranLokasi(){
+        // Ambil ukuran layar user (monitor)
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        this.pack();
+        
+        int frameWidth = this.getSize().width;
+        System.out.println(frameWidth);
+        System.out.println(this.getSize().height);
+
+        // Hitung posisi X agar mepet ke kanan
+        int x = screenSize.width - frameWidth;
+        int y = 0; // 0 berarti mepet ke atas
+
+        this.setLocation(x, y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,6 +4,9 @@
  */
 package Frames;
 
+import java.net.URL;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Edella
@@ -18,11 +21,25 @@ public class P_CardJanji extends javax.swing.JPanel {
     }
 
     public void setTitle(String text) {
-        LB_Icon.setText(text);
+        LB_Title.setText(text);
     }
 
     public void setDate(String text) {
         LB_Date.setText(text);
+    }
+    
+    public void setIcon(String text) {
+        URL url = getClass().getResource("/Frames/images/mood/" + text + ".png");
+        ImageIcon icon;
+
+        if (url != null) { icon = new ImageIcon(url);
+        } else {
+            icon = new ImageIcon(
+                getClass().getResource("/Frames/images/mood/bangga.png")
+            );
+        }
+        
+        LB_Icon.setIcon(icon);
     }
     /**
      * This method is called from within the constructor to initialize the form.

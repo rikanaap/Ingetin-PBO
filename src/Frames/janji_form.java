@@ -8,6 +8,7 @@ import KoneksiDB.Global;
 import KoneksiDB.JanjiDB;
 import KoneksiDB.MoodDB;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -66,6 +67,7 @@ public class janji_form extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingetin - Janji");
+        setAlwaysOnTop(true);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(234, 227, 227));
         setFocusable(false);
@@ -250,8 +252,7 @@ public class janji_form extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel7Layout.createSequentialGroup()
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13)
-                            .addGap(43, 43, 43))
+                            .addComponent(jLabel13))
                         .addComponent(CB_Mood, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,13 +329,15 @@ public class janji_form extends javax.swing.JFrame {
 
     private void BTN_SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SimpanActionPerformed
         database_janji.tambahJanji(
-                TF_Janji.getText(), 
-                Global.tanggal, 
-                Global.toInt(SP_Jam.getValue().toString()), 
-                Global.toInt(SP_Menit.getValue().toString()), 
-                false, 
-                ambilIDMood()
+        TF_Janji.getText(), 
+        Global.tanggal, 
+        Global.toInt(SP_Jam.getValue().toString()), 
+        Global.toInt(SP_Menit.getValue().toString()), 
+        false, 
+        ambilIDMood()
         );
+        JOptionPane.showMessageDialog(this, "Janji sudah diingat");
+        this.dispose();
     }//GEN-LAST:event_BTN_SimpanActionPerformed
 
     private void BTN_BatalkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BatalkanActionPerformed

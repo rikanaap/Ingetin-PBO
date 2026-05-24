@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Ingetin - Janji"/>
+    <Property name="alwaysOnTop" type="boolean" value="true"/>
     <Property name="autoRequestFocus" type="boolean" value="false"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="e3" green="e3" red="ea" type="rgb"/>
@@ -344,7 +345,6 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace pref="54" max="-2" attributes="0"/>
                                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="CB_Mood" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
                               </Group>

@@ -56,14 +56,15 @@ public class janji extends javax.swing.JFrame {
         P_CardFlow3 = new javax.swing.JScrollPane();
         P_CardFlow = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        BTN_TambahIngatan = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingetin - Janji");
+        setAlwaysOnTop(true);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(234, 227, 227));
         setFocusable(false);
@@ -133,31 +134,36 @@ public class janji extends javax.swing.JFrame {
         jPanel3.add(jPanel4);
 
         P_CardFlow3.setBackground(new java.awt.Color(234, 226, 226));
-        P_CardFlow3.setOpaque(true);
+        P_CardFlow3.setBorder(null);
+        P_CardFlow3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        P_CardFlow3.setFocusable(false);
+        P_CardFlow3.setHorizontalScrollBar(null);
         P_CardFlow3.setPreferredSize(new java.awt.Dimension(400, 150));
-        jPanel3.add(P_CardFlow3);
 
         P_CardFlow.setBackground(new java.awt.Color(234, 226, 226));
-        P_CardFlow.setMinimumSize(new java.awt.Dimension(400, 200));
-        P_CardFlow.setPreferredSize(new java.awt.Dimension(400, 10));
-        jPanel3.add(P_CardFlow);
+        P_CardFlow.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(234, 226, 226)));
+        P_CardFlow.setMinimumSize(new java.awt.Dimension(300, 200));
+        P_CardFlow.setPreferredSize(new java.awt.Dimension(300, 200));
+        P_CardFlow3.setViewportView(P_CardFlow);
+
+        jPanel3.add(P_CardFlow3);
 
         jPanel2.setOpaque(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 200));
         jPanel2.setLayout(null);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Motivasi.png"))); // NOI18N
-        jButton3.setText("<html>Tambah Ingatan</html>");
-        jButton3.setToolTipText("");
-        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(this::jButton3ActionPerformed);
-        jPanel2.add(jButton3);
-        jButton3.setBounds(290, 100, 98, 96);
+        BTN_TambahIngatan.setBackground(new java.awt.Color(255, 255, 255));
+        BTN_TambahIngatan.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        BTN_TambahIngatan.setForeground(new java.awt.Color(0, 0, 0));
+        BTN_TambahIngatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Motivasi.png"))); // NOI18N
+        BTN_TambahIngatan.setText("<html>Tambah Ingatan</html>");
+        BTN_TambahIngatan.setToolTipText("");
+        BTN_TambahIngatan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        BTN_TambahIngatan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BTN_TambahIngatan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BTN_TambahIngatan.addActionListener(this::BTN_TambahIngatanActionPerformed);
+        jPanel2.add(BTN_TambahIngatan);
+        BTN_TambahIngatan.setBounds(290, 100, 98, 96);
 
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 0, 88));
@@ -207,7 +213,7 @@ public class janji extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
                 .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -218,7 +224,7 @@ public class janji extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -226,9 +232,10 @@ public class janji extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void BTN_TambahIngatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_TambahIngatanActionPerformed
+        janji_form F_JanjiForm = new janji_form();
+        F_JanjiForm.setVisible(true);
+    }//GEN-LAST:event_BTN_TambahIngatanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,9 +269,10 @@ public class janji extends javax.swing.JFrame {
 
         try {
 
-            P_CardFlow3.removeAll();
+            P_CardFlow.removeAll();
 
             while (rs.next()) {
+                System.out.println(rs);
                 System.out.println(rs.getString("appointment"));
 
                 P_CardJanji card = new P_CardJanji();
@@ -276,12 +284,16 @@ public class janji extends javax.swing.JFrame {
                 card.setDate(
                     rs.getDate("date").toString()
                 );
+                
+                card.setIcon(
+                    rs.getString("icon")
+                );
 
-                P_CardFlow3.add(card);
+                P_CardFlow.add(card);
             }
 
-            P_CardFlow3.revalidate();
-            P_CardFlow3.repaint();
+            P_CardFlow.revalidate();
+            P_CardFlow.repaint();
 
         } catch (Exception e) {
 
@@ -317,13 +329,13 @@ public class janji extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTN_TambahIngatan;
     private javax.swing.JPanel Background;
     private javax.swing.JLabel L_Tanggal;
     private javax.swing.JPanel Navbar;
     private javax.swing.JPanel P_CardFlow;
     private javax.swing.JScrollPane P_CardFlow3;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
