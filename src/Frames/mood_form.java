@@ -57,12 +57,11 @@ public class mood_form extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        iconLabel = new javax.swing.JLabel();
         moodinput = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         simpan_mood = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        iconLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(233, 225, 225));
@@ -123,8 +122,7 @@ public class mood_form extends javax.swing.JFrame {
 
         jPanel3.add(jPanel7);
 
-        jLabel7.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        jLabel7.setText("Icon");
+        iconLabel.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
 
         moodinput.setBackground(new java.awt.Color(234, 227, 227));
         moodinput.setFont(new java.awt.Font("Corbel", 0, 15)); // NOI18N
@@ -164,14 +162,13 @@ public class mood_form extends javax.swing.JFrame {
                         .addGap(138, 138, 138)))
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(iconLabel))
-                    .addGroup(BackgroundLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(iconLabel)
+                        .addGap(24, 24, 24))))
         );
         BackgroundLayout.setVerticalGroup(
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,10 +179,8 @@ public class mood_form extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(BackgroundLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel7))
+                        .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
                             .addComponent(iconLabel))
                         .addGap(4, 4, 4)
                         .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -220,110 +215,6 @@ public class mood_form extends javax.swing.JFrame {
         // TODO add your handling code here:  
         String mood = jComboBox1.getSelectedItem().toString().toLowerCase();
         setIconMood(mood);
-
-//        if (mood.equals("Bangga")) {
-//            setIconMood("bangga");
-//        }
-//
-//        else if (mood.equals("Bersalah")) {
-//            setIconMood("bersalah");
-//        }
-//
-//        else if (mood.equals("Bingung")) {
-//            setIconMood("bingung");
-//        }
-//
-//        else if (mood.equals("Bosan")) {
-//            setIconMood("bored");
-//        }
-//
-//        else if (mood.equals("Cemas")) {
-//            setIconMood("cemas");
-//        }
-//
-//        else if (mood.equals("Nyaman")) {
-//            setIconMood("comfy");
-//        }
-//
-//        else if (mood.equals("Frustasi")) {
-//            setIconMood("frustasi");
-//        }
-//
-//        else if (mood.equals("Inspirasi")) {
-//            setIconMood("inspired");
-//        }
-//
-//        else if (mood.equals("Kaget")) {
-//            setIconMood("kaget");
-//        }
-//
-//        else if (mood.equals("Kepo")) {
-//            setIconMood("kepo");
-//        }
-//
-//        else if (mood.equals("Kewalahan")) {
-//            setIconMood("kewalahan");
-//        }
-//
-//        else if (mood.equals("Marah")) {
-//            setIconMood("marah");
-//        }
-//
-//        else if (mood.equals("Melamun")) {
-//            setIconMood("melamun");
-//        }
-//
-//        else if (mood.equals("Mimpi")) {
-//            setIconMood("mimpi");
-//        }
-//
-//        else if (mood.equals("Musisi")) {
-//            setIconMood("musisi");
-//        }
-//
-//        else if (mood.equals("Nakal")) {
-//            setIconMood("nakal");
-//        }
-//
-//        else if (mood.equals("Nostalgia")) {
-//            setIconMood("nostalgia");
-//        }
-//
-//        else if (mood.equals("Santai")) {
-//            setIconMood("nyantai");
-//        }
-//
-//        else if (mood.equals("Sakit")) {
-//            setIconMood("sakit");
-//        }
-//
-//        else if (mood.equals("Semangat")) {
-//            setIconMood("semangat");
-//        }
-//
-//        else if (mood.equals("Malu")) {
-//            setIconMood("shy");
-//        }
-//
-//        else if (mood.equals("Siap")) {
-//            setIconMood("siap");
-//        }
-//
-//        else if (mood.equals("Stres")) {
-//            setIconMood("stres");
-//        }
-//
-//        else if (mood.equals("Bersyukur")) {
-//            setIconMood("syukur");
-//        }
-//
-//        else if (mood.equals("Tenang")) {
-//            setIconMood("tenang");
-//        }
-//
-//        else if (mood.equals("Tidur")) {
-//            setIconMood("turu");
-//        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
@@ -358,7 +249,6 @@ public class mood_form extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

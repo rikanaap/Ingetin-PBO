@@ -4,6 +4,8 @@
  */
 package Frames;
 
+import KoneksiDB.JanjiDB;
+import java.awt.Color;
 import java.net.URL;
 import javax.swing.ImageIcon;
 
@@ -16,8 +18,14 @@ public class P_CardJanji extends javax.swing.JPanel {
     /**
      * Creates new form P_CardJanji2
      */
-    public P_CardJanji() {
+    private static int id;
+    private JanjiDB database_janji;
+    public P_CardJanji(int id_String) {
         initComponents();
+        database_janji = new JanjiDB();
+        id = id_String;
+        BTN_Delete.setVisible(false);
+        L_Alarm.setVisible(false);
     }
 
     public void setTitle(String text) {
@@ -26,6 +34,26 @@ public class P_CardJanji extends javax.swing.JPanel {
 
     public void setDate(String text) {
         LB_Date.setText(text);
+    }
+    
+    public void setColor(String mode){
+        switch (mode) {
+            case "finish":
+                this.setBackground(Color.GREEN);
+                checkbox.setVisible(false);
+                BTN_Delete.setVisible(true);
+                break;
+            case "warn":
+                this.setBackground(Color.YELLOW);
+                break;
+            case "over":
+                this.setBackground(Color.pink);
+                break;
+        }
+    }
+    
+    public void setAlarm(){
+        L_Alarm.setVisible(true);
     }
     
     public void setIcon(String text) {
@@ -41,6 +69,11 @@ public class P_CardJanji extends javax.swing.JPanel {
         
         LB_Icon.setIcon(icon);
     }
+    
+    private void changeData(){
+        boolean finished = database_janji.toggleFinish(id);
+        BTN_Delete.setVisible(finished);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,10 +83,12 @@ public class P_CardJanji extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
+        checkbox = new javax.swing.JCheckBox();
+        BTN_Delete = new javax.swing.JLabel();
         LB_Icon = new javax.swing.JLabel();
         LB_Title = new javax.swing.JLabel();
         LB_Date = new javax.swing.JLabel();
+        L_Alarm = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(234, 227, 227));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -62,8 +97,22 @@ public class P_CardJanji extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(335, 35));
         setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
-        jCheckBox1.addActionListener(this::jCheckBox1ActionPerformed);
-        add(jCheckBox1);
+        checkbox.setBackground(new java.awt.Color(204, 204, 204));
+        checkbox.setBorder(null);
+        checkbox.setFocusPainted(false);
+        checkbox.setFocusable(false);
+        checkbox.setOpaque(true);
+        checkbox.addActionListener(this::checkboxActionPerformed);
+        add(checkbox);
+
+        BTN_Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Cancel.png"))); // NOI18N
+        BTN_Delete.setFocusable(false);
+        BTN_Delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_DeleteMouseClicked(evt);
+            }
+        });
+        add(BTN_Delete);
 
         LB_Icon.setForeground(new java.awt.Color(0, 0, 0));
         LB_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Mood.png"))); // NOI18N
@@ -76,17 +125,30 @@ public class P_CardJanji extends javax.swing.JPanel {
         LB_Date.setForeground(new java.awt.Color(0, 0, 0));
         LB_Date.setText("jLabel1");
         add(LB_Date);
+
+        L_Alarm.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+        L_Alarm.setForeground(new java.awt.Color(0, 0, 0));
+        L_Alarm.setText("⏰");
+        add(L_Alarm);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    private void checkboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxActionPerformed
+        changeData();
+        
+    }//GEN-LAST:event_checkboxActionPerformed
+
+    private void BTN_DeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_DeleteMouseClicked
+        database_janji.hapusJanji(id);
+        this.setVisible(false);
+    }//GEN-LAST:event_BTN_DeleteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BTN_Delete;
     private javax.swing.JLabel LB_Date;
     private javax.swing.JLabel LB_Icon;
     private javax.swing.JLabel LB_Title;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JLabel L_Alarm;
+    private javax.swing.JCheckBox checkbox;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,7 +19,7 @@ import javax.swing.Timer;
 public class Kalender extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Kalender.class.getName());
-    private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MMMM, HH:mm:ss");
+    private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MMMM, HH:mm");
 
     /**
      * Creates new form Kalender
@@ -89,6 +89,11 @@ public class Kalender extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Back.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel5);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -97,6 +102,11 @@ public class Kalender extends javax.swing.JFrame {
         jLabel6.setText("INGETIN");
         jLabel6.setToolTipText("");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel6);
 
         L_Hour.setBackground(new java.awt.Color(0, 0, 0));
@@ -256,6 +266,14 @@ public class Kalender extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BTN_SettingActionPerformed
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        back();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        back();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -338,6 +356,12 @@ public class Kalender extends javax.swing.JFrame {
     private void updateWaktu(){
          LocalDateTime sekarang = LocalDateTime.now();
          L_Hour.setText(sekarang.format(fmt));
+    }
+    
+    private void back(){
+        welcome FWelcome = new welcome();
+        FWelcome.setVisible(true);
+        this.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

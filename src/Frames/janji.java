@@ -9,8 +9,11 @@ import KoneksiDB.JanjiDB;
 import KoneksiDB.MoodDB;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import javax.swing.Timer;
 
 /**
  *
@@ -19,6 +22,8 @@ import java.util.Locale;
 public class janji extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(janji.class.getName());
+    private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MMMM, HH:mm");
+    public LocalTime waktu;
     private JanjiDB database_janji;
     private MoodDB database_mood;
     /**
@@ -32,6 +37,9 @@ public class janji extends javax.swing.JFrame {
         
         setUkuranLokasi();
         loadCard();
+        updateWaktu();
+        Timer timer = new Timer(60000, e -> updateWaktu());
+        timer.start();
         this.pack();
     }
 
@@ -49,7 +57,7 @@ public class janji extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        L_Hour = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         L_Tanggal = new javax.swing.JLabel();
@@ -93,6 +101,11 @@ public class janji extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Back.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel5);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -101,15 +114,20 @@ public class janji extends javax.swing.JFrame {
         jLabel6.setText("INGETIN");
         jLabel6.setToolTipText("");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel6);
 
-        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel9.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel9.setText("21 Mei, 09:00");
-        jLabel9.setPreferredSize(new java.awt.Dimension(260, 20));
-        jPanel1.add(jLabel9);
+        L_Hour.setBackground(new java.awt.Color(0, 0, 0));
+        L_Hour.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
+        L_Hour.setForeground(new java.awt.Color(0, 0, 0));
+        L_Hour.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        L_Hour.setText("21 Mei, 09:00");
+        L_Hour.setPreferredSize(new java.awt.Dimension(260, 20));
+        jPanel1.add(L_Hour);
 
         Navbar.add(jPanel1);
 
@@ -235,7 +253,16 @@ public class janji extends javax.swing.JFrame {
     private void BTN_TambahIngatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_TambahIngatanActionPerformed
         janji_form F_JanjiForm = new janji_form();
         F_JanjiForm.setVisible(true);
+        F_JanjiForm.setJanjiForm(this);
     }//GEN-LAST:event_BTN_TambahIngatanActionPerformed
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        back();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        back();
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -262,7 +289,20 @@ public class janji extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new janji().setVisible(true));
     }
     
-    private void loadCard() {
+    private void back(){
+        Kalender FKalender = new Kalender();
+        FKalender.setVisible(true);
+        this.dispose();
+    }
+    
+    private void updateWaktu(){
+         LocalDateTime sekarang = LocalDateTime.now();
+         L_Hour.setText(sekarang.format(fmt));
+         waktu = LocalTime.now();
+         loadCard();
+    }
+    
+    public void loadCard() {
 
         ResultSet rs = database_janji.tampilJanji();
         L_Tanggal.setText(this.formatKeHariBulan(Global.tanggal));
@@ -272,22 +312,23 @@ public class janji extends javax.swing.JFrame {
             P_CardFlow.removeAll();
 
             while (rs.next()) {
-                System.out.println(rs);
-                System.out.println(rs.getString("appointment"));
-
-                P_CardJanji card = new P_CardJanji();
+                P_CardJanji card = new P_CardJanji(rs.getInt("id_janji"));
 
                 card.setTitle(
                     rs.getString("appointment")
                 );
 
                 card.setDate(
-                    rs.getDate("date").toString()
+                    rs.getString("hour") + ":" + rs.getString("minute")
                 );
                 
                 card.setIcon(
                     rs.getString("icon")
                 );
+                
+                if(rs.getBoolean("alarm")) card.setAlarm();
+                
+                card.setColor(checkMode(rs));
 
                 P_CardFlow.add(card);
             }
@@ -298,6 +339,27 @@ public class janji extends javax.swing.JFrame {
         } catch (Exception e) {
 
             System.out.println(e);
+        }
+    }
+    
+    public String checkMode(ResultSet rs){
+        try {
+            int hour = rs.getInt("hour"); 
+            int minute = rs.getInt("minute");
+            boolean isFinish = rs.getBoolean("finished");
+
+            if (isFinish) {
+                return "finish";
+            } else {
+                LocalTime waktuRS = LocalTime.of(hour, minute);
+                LocalTime batasWarn = waktuRS.minusHours(1);
+                if (waktu.isAfter(batasWarn) && waktu.isBefore(waktuRS)) return "warn";
+                if (waktu.isAfter(waktuRS)) return "over";
+            }
+            return "normal";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "error";
         }
     }
     
@@ -331,6 +393,7 @@ public class janji extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_TambahIngatan;
     private javax.swing.JPanel Background;
+    private javax.swing.JLabel L_Hour;
     private javax.swing.JLabel L_Tanggal;
     private javax.swing.JPanel Navbar;
     private javax.swing.JPanel P_CardFlow;
@@ -341,7 +404,6 @@ public class janji extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

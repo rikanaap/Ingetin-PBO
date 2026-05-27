@@ -19,6 +19,7 @@ public class janji_form extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(janji_form.class.getName());
     private JanjiDB database_janji;
     private MoodDB database_mood;
+    private janji Frame_Janji;
     
     public janji_form() {
         initComponents();
@@ -326,6 +327,7 @@ public class janji_form extends javax.swing.JFrame {
         );
         JOptionPane.showMessageDialog(this, "Janji sudah diingat");
         this.dispose();
+        Frame_Janji.loadCard();
     }//GEN-LAST:event_BTN_SimpanActionPerformed
 
     private void BTN_BatalkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BatalkanActionPerformed
@@ -388,6 +390,10 @@ public class janji_form extends javax.swing.JFrame {
         int y = 0; // 0 berarti mepet ke atas
 
         this.setLocation(x, y);
+    }
+    
+    public void setJanjiForm(janji FJanji){
+        Frame_Janji = FJanji;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

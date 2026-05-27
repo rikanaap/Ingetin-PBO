@@ -4,6 +4,11 @@
  */
 package Frames;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Timer;
+
 /**
  *
  * @author nabil
@@ -11,6 +16,8 @@ package Frames;
 public class welcome extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(welcome.class.getName());
+    private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MMMM, HH:mm");
+    public LocalTime waktu;
 
     /**
      * Creates new form welcome
@@ -18,6 +25,9 @@ public class welcome extends javax.swing.JFrame {
     public welcome() {
         initComponents();
         setUkuranLokasi();
+        updateWaktu();
+        Timer timer = new Timer(60000, e -> updateWaktu());
+        timer.start();
     }
 
     /**
@@ -38,7 +48,7 @@ public class welcome extends javax.swing.JFrame {
         Navbar = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        L_Hour = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Welcome Ingetin");
@@ -83,12 +93,12 @@ public class welcome extends javax.swing.JFrame {
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(jLabel8);
 
-        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel9.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel9.setText("21 Mei, 09:00");
-        jLabel9.setPreferredSize(new java.awt.Dimension(260, 20));
-        jPanel3.add(jLabel9);
+        L_Hour.setBackground(new java.awt.Color(0, 0, 0));
+        L_Hour.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
+        L_Hour.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        L_Hour.setText("21 Mei, 09:00");
+        L_Hour.setPreferredSize(new java.awt.Dimension(260, 20));
+        jPanel3.add(L_Hour);
 
         Navbar.add(jPanel3);
 
@@ -205,15 +215,21 @@ public class welcome extends javax.swing.JFrame {
 
         this.setLocation(x, y);
     }
+    
+    private void updateWaktu(){
+         LocalDateTime sekarang = LocalDateTime.now();
+         L_Hour.setText(sekarang.format(fmt));
+         waktu = LocalTime.now();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel L_Hour;
     private javax.swing.JPanel Navbar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton tambah_ingatan;
