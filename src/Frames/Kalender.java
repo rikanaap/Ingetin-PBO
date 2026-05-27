@@ -232,8 +232,8 @@ public class Kalender extends javax.swing.JFrame {
             .addGroup(BackgroundLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BTN_Setting, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BTN_Setting, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         BackgroundLayout.setVerticalGroup(
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +245,7 @@ public class Kalender extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(9, 9, 9)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BTN_Setting, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BTN_Setting, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,7 +263,9 @@ public class Kalender extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_SettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SettingActionPerformed
-        // TODO add your handling code here:
+        setting FSetting = new setting();
+        FSetting.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BTN_SettingActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -321,7 +323,7 @@ public class Kalender extends javax.swing.JFrame {
         P_KalenderFlow.setLayout(new GridLayout(0, 7, 3, 3));
         
         for (int i = 1; i <= totalGridSlots; i++) {
-            P_Calendar card = new P_Calendar();
+            P_Calendar card = new P_Calendar(this);
             if (i <= offsetDays) {
                 int tanggalBulanLalu = totalDaysLastMonth - offsetDays + i;
                 card.setTitle("" + tanggalBulanLalu);

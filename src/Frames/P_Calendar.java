@@ -15,11 +15,13 @@ import javax.swing.BorderFactory;
  */
 public class P_Calendar extends javax.swing.JPanel {
     private boolean isActive = true;
+    private Kalender Frame_Kalender;
     /**
      * Creates new form P_Calendar
      */
-    public P_Calendar() {
+    public P_Calendar(Kalender FKalender) {
         initComponents();
+        Frame_Kalender = FKalender;
     }
     
     public void setTitle(String text) {
@@ -112,7 +114,8 @@ public class P_Calendar extends javax.swing.JPanel {
             }
             janji j_form = new janji();
             j_form.setVisible(true);
-            }
+            Frame_Kalender.dispose();
+        }
     }//GEN-LAST:event_formMouseClicked
 
 

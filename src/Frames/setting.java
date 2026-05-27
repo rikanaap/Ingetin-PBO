@@ -17,6 +17,7 @@ public class setting extends javax.swing.JFrame {
      */
     public setting() {
         initComponents();
+        setUkuranLokasi();
     }
 
     /**
@@ -215,6 +216,22 @@ public class setting extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new setting().setVisible(true));
+    }
+    
+     private void setUkuranLokasi(){
+        // Ambil ukuran layar user (monitor)
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        this.pack();
+        
+        int frameWidth = this.getSize().width;
+        System.out.println(frameWidth);
+        System.out.println(this.getSize().height);
+
+        // Hitung posisi X agar mepet ke kanan
+        int x = screenSize.width - frameWidth;
+        int y = 0; // 0 berarti mepet ke atas
+
+        this.setLocation(x, y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
