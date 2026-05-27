@@ -98,7 +98,6 @@ public class janji extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 13, 0));
 
         jLabel5.setFont(new java.awt.Font("Garamond", 1, 15)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Back.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,7 +108,6 @@ public class janji extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("INGETIN");
         jLabel6.setToolTipText("");
@@ -123,7 +121,6 @@ public class janji extends javax.swing.JFrame {
 
         L_Hour.setBackground(new java.awt.Color(0, 0, 0));
         L_Hour.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        L_Hour.setForeground(new java.awt.Color(0, 0, 0));
         L_Hour.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         L_Hour.setText("21 Mei, 09:00");
         L_Hour.setPreferredSize(new java.awt.Dimension(260, 20));
@@ -144,7 +141,6 @@ public class janji extends javax.swing.JFrame {
 
         L_Tanggal.setBackground(new java.awt.Color(0, 0, 0));
         L_Tanggal.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        L_Tanggal.setForeground(new java.awt.Color(0, 0, 0));
         L_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         L_Tanggal.setText("27 Mei 2026");
         jPanel4.add(L_Tanggal);
@@ -170,9 +166,7 @@ public class janji extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 200));
         jPanel2.setLayout(null);
 
-        BTN_TambahIngatan.setBackground(new java.awt.Color(255, 255, 255));
         BTN_TambahIngatan.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        BTN_TambahIngatan.setForeground(new java.awt.Color(0, 0, 0));
         BTN_TambahIngatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Motivasi.png"))); // NOI18N
         BTN_TambahIngatan.setText("<html>Tambah Ingatan</html>");
         BTN_TambahIngatan.setToolTipText("");
@@ -185,7 +179,7 @@ public class janji extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 0, 88));
-        jLabel4.setText("<html> \nAyo tambah ingatan \ndan setel alarmnya!! </html>");
+        jLabel4.setText("<html>  Ayo tambah ingatan  dan setel alarmnya!! </html>");
         jLabel4.setAlignmentY(0.1F);
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel4.setMinimumSize(new java.awt.Dimension(270, 21));
@@ -201,9 +195,7 @@ public class janji extends javax.swing.JFrame {
         jPanel2.add(jLabel1);
         jLabel1.setBounds(20, 50, 144, 144);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Motivasi.png"))); // NOI18N
         jButton2.setText("<html>Setel Alarm</html>");
         jButton2.setToolTipText("");
