@@ -66,7 +66,6 @@ public class table_mood extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(234, 227, 227));
-        setPreferredSize(new java.awt.Dimension(580, 360));
 
         jPanel3.setBackground(new java.awt.Color(234, 227, 227));
         jPanel3.setName("kumpulan mood"); // NOI18N

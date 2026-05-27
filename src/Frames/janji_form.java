@@ -93,13 +93,11 @@ public class janji_form extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 13, 0));
 
         jLabel5.setFont(new java.awt.Font("Garamond", 1, 15)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Back.png"))); // NOI18N
         jPanel1.add(jLabel5);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("INGETIN");
         jLabel6.setToolTipText("");
@@ -108,7 +106,6 @@ public class janji_form extends javax.swing.JFrame {
 
         jLabel9.setBackground(new java.awt.Color(0, 0, 0));
         jLabel9.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel9.setText("21 Mei, 09:00");
         jLabel9.setPreferredSize(new java.awt.Dimension(260, 20));
@@ -122,12 +119,10 @@ public class janji_form extends javax.swing.JFrame {
         jPanel5.setOpaque(false);
 
         jLabel7.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Sebutkan Janji");
 
         TF_Janji.setBackground(new java.awt.Color(234, 227, 227));
         TF_Janji.setFont(new java.awt.Font("Corbel", 0, 15)); // NOI18N
-        TF_Janji.setForeground(new java.awt.Color(0, 0, 0));
         TF_Janji.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -156,7 +151,6 @@ public class janji_form extends javax.swing.JFrame {
         jPanel7.setOpaque(false);
 
         jLabel10.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Jam");
 
         SP_Jam.setFont(new java.awt.Font("Corbel", 0, 24)); // NOI18N
@@ -165,7 +159,6 @@ public class janji_form extends javax.swing.JFrame {
         SP_Jam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel11.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Menit");
 
         SP_Menit.setFont(new java.awt.Font("Corbel", 0, 24)); // NOI18N
@@ -175,22 +168,18 @@ public class janji_form extends javax.swing.JFrame {
         SP_Menit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel12.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText(":");
 
         jLabel13.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Mood");
 
         CB_Mood.setBackground(new java.awt.Color(234, 227, 227));
         CB_Mood.setFont(new java.awt.Font("Corbel", 0, 12)); // NOI18N
-        CB_Mood.setForeground(new java.awt.Color(0, 0, 0));
         CB_Mood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_Mood.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         BTN_Simpan.setBackground(new java.awt.Color(234, 227, 227));
         BTN_Simpan.setFont(new java.awt.Font("Corbel", 0, 15)); // NOI18N
-        BTN_Simpan.setForeground(new java.awt.Color(0, 0, 0));
         BTN_Simpan.setText("Simpan Janji");
         BTN_Simpan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         BTN_Simpan.addActionListener(this::BTN_SimpanActionPerformed);
@@ -218,7 +207,6 @@ public class janji_form extends javax.swing.JFrame {
 
         BTN_Batalkan.setBackground(new java.awt.Color(234, 227, 227));
         BTN_Batalkan.setFont(new java.awt.Font("Corbel", 0, 15)); // NOI18N
-        BTN_Batalkan.setForeground(new java.awt.Color(0, 0, 0));
         BTN_Batalkan.setText("Batalkan");
         BTN_Batalkan.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         BTN_Batalkan.addActionListener(this::BTN_BatalkanActionPerformed);
