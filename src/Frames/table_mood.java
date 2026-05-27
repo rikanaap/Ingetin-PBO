@@ -4,11 +4,18 @@
  */
 package Frames;
 
+import KoneksiDB.Koneksi;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nabil
  */
 public class table_mood extends javax.swing.JFrame {
+    Koneksi kon;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(table_mood.class.getName());
 
@@ -17,6 +24,9 @@ public class table_mood extends javax.swing.JFrame {
      */
     public table_mood() {
         initComponents();
+        kon = new Koneksi();
+        
+        tampilSemuaData();
     }
 
     /**
@@ -40,12 +50,15 @@ public class table_mood extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableMood = new javax.swing.JTable();
         cari_mood = new javax.swing.JButton();
-        tambah_mood = new javax.swing.JButton();
+        tampil_mood = new javax.swing.JButton();
         update_mood = new javax.swing.JButton();
         hapus_mood = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        cariID = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        tambah_mood = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -66,11 +79,11 @@ public class table_mood extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(234, 227, 227));
-        setPreferredSize(new java.awt.Dimension(580, 360));
+        setPreferredSize(new java.awt.Dimension(600, 580));
 
         jPanel3.setBackground(new java.awt.Color(234, 227, 227));
         jPanel3.setName("kumpulan mood"); // NOI18N
-        jPanel3.setPreferredSize(new java.awt.Dimension(580, 360));
+        jPanel3.setPreferredSize(new java.awt.Dimension(580, 400));
 
         Navbar.setBackground(new java.awt.Color(215, 182, 244));
         Navbar.setMaximumSize(null);
@@ -106,7 +119,7 @@ public class table_mood extends javax.swing.JFrame {
 
         Navbar.add(jPanel1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableMood.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -117,22 +130,29 @@ public class table_mood extends javax.swing.JFrame {
                 "ID", "Icon", "Tittle"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableMood);
 
         cari_mood.setBackground(new java.awt.Color(234, 227, 227));
         cari_mood.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
         cari_mood.setText("Cari data mood");
         cari_mood.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cari_mood.addActionListener(this::cari_moodActionPerformed);
 
-        tambah_mood.setBackground(new java.awt.Color(234, 227, 227));
-        tambah_mood.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        tambah_mood.setText("Tambah data mood");
-        tambah_mood.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        tampil_mood.setBackground(new java.awt.Color(234, 227, 227));
+        tampil_mood.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
+        tampil_mood.setText("Tampil data mood");
+        tampil_mood.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        tampil_mood.addActionListener(this::tampil_moodActionPerformed);
 
         update_mood.setBackground(new java.awt.Color(234, 227, 227));
         update_mood.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
         update_mood.setText("Update data mood");
         update_mood.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        update_mood.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                update_moodMouseClicked(evt);
+            }
+        });
         update_mood.addActionListener(this::update_moodActionPerformed);
 
         hapus_mood.setBackground(new java.awt.Color(234, 227, 227));
@@ -144,25 +164,44 @@ public class table_mood extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel1.setText("KUMPULAN MOOD KAMU");
 
+        cariID.addActionListener(this::cariIDActionPerformed);
+
+        jLabel2.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
+        jLabel2.setText("Cari mood kamu berdasarkan  ID");
+
+        tambah_mood.setBackground(new java.awt.Color(234, 227, 227));
+        tambah_mood.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
+        tambah_mood.setText("Tambah data mood");
+        tambah_mood.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        tambah_mood.addActionListener(this::tambah_moodActionPerformed);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tambah_mood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cari_mood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(update_mood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hapus_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(162, 162, 162))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cariID))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tampil_mood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cari_mood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(update_mood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hapus_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tambah_mood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(53, 53, 53))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,41 +209,117 @@ public class table_mood extends javax.swing.JFrame {
                 .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cari_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(cariID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(cari_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(tampil_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tambah_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(update_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(hapus_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 54, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void update_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_moodActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        int row = tableMood.getSelectedRow();
+        
+        if(row==-1){
+            JOptionPane.showMessageDialog(null, "Pilih data dulu");
+            
+            return;
+        }
+        
+        String id = tableMood.getValueAt(row,0).toString();
+        
+         updateMood form =  new updateMood(id);
+         
+         form.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_update_moodActionPerformed
 
     private void hapus_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapus_moodActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        int row = tableMood.getSelectedRow();
+        
+        if(row==-1){
+            JOptionPane.showMessageDialog(null, "Pilih data yang mau di hapus");
+            
+            return;
+        }
+        
+        String id = tableMood.getValueAt(row, 0).toString();
+        
+        int confirm = JOptionPane.showConfirmDialog(null, "Yakin hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        
+        if(confirm==0){
+            try{
+                Statement st = kon.con.createStatement();
+                
+                String sql = "DELETE FROM db_ingetin" + "WHERE id='" + id + "'";
+                
+                st.executeUpdate(sql);
+                
+                JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+                
+                tampilSemuaData();
+                
+            }catch(Exception e){
+                 JOptionPane.showMessageDialog(null,e.getMessage());
+            }
+        }
     }//GEN-LAST:event_hapus_moodActionPerformed
+
+    private void update_moodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_update_moodMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_update_moodMouseClicked
+
+    private void cari_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_moodActionPerformed
+        // TODO add your handling code here:
+        cariData();
+    }//GEN-LAST:event_cari_moodActionPerformed
+
+    private void tambah_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambah_moodActionPerformed
+        // TODO add your handling code here:
+        tambahMood form = new tambahMood();
+        
+        form.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_tambah_moodActionPerformed
+
+    private void cariIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cariIDActionPerformed
+
+    private void tampil_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tampil_moodActionPerformed
+        // TODO add your handling code here:
+        tampilSemuaData();
+    }//GEN-LAST:event_tampil_moodActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,12 +345,61 @@ public class table_mood extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new table_mood().setVisible(true));
     }
+    
+    public void tampilSemuaData(){
+        Object header[] ={"ID","Icon","Tittle"};
+        
+        DefaultTableModel data = new DefaultTableModel(null, header);
+        
+        tableMood.setModel(data);
+        try{
+            Statement st = kon.con.createStatement();
+            ResultSet rs =  st.executeQuery("SELECT * FROM db_ingetin");
+            
+            while(rs.next()){
+                String row[] = {rs.getString("id"), rs.getString("icon"), rs.getString("tittle")};
+                data.addRow(row);
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        };
+    }
+    
+    public void cariData(){
+        Object header[] = {"ID","Icon","Tittle"};
+         DefaultTableModel data = new DefaultTableModel(null, header);
+         
+         tableMood.setModel(data);
+         
+         String cari = cariID.getText();
+         
+         try{
+         
+            Statement st = kon.con.createStatement();
+            String sql = "SELECT * FROM db_ingrtin" + "WHERE id LIKE '%" + cari +"%'";
+             
+            ResultSet rs = st.executeQuery(sql);
+             
+            while(rs.next()){
+                String row[] = {rs.getString("id"), rs.getString("icon"), rs.getString("tittle")};
+                
+                data.addRow(row);
+            }
+             
+         }catch(Exception e){
+             JOptionPane.showMessageDialog(null, e.getMessage());
+         }
+    }
 
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Navbar;
+    private javax.swing.JTextField cariID;
     private javax.swing.JButton cari_mood;
     private javax.swing.JButton hapus_mood;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
@@ -247,8 +411,9 @@ public class table_mood extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableMood;
     private javax.swing.JButton tambah_mood;
+    private javax.swing.JButton tampil_mood;
     private javax.swing.JButton update_mood;
     // End of variables declaration//GEN-END:variables
 }
