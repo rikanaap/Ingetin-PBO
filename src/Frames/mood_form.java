@@ -4,8 +4,11 @@
  */
 package Frames;
 
+import KoneksiDB.MoodDB;
+import java.awt.HeadlessException;
 import java.net.URL;
 import javax.swing.ImageIcon;
+import java.sql.ResultSet;
 
 /**
  *
@@ -14,14 +17,20 @@ import javax.swing.ImageIcon;
 public class mood_form extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(mood_form.class.getName());
+    private MoodDB database_mood;
+    private static int id = 0;
 
     /**
      * Creates new form mood_form
      */
-    public mood_form() {
+    public mood_form(int id_mood) {
         initComponents();
+        database_mood = new MoodDB();
+        id = id_mood;
         
+        if(id_mood != 0) setData();
         setIconMood("bangga");
+        setUkuranLokasi();
     }
 
     /**
@@ -166,7 +175,6 @@ public class mood_form extends javax.swing.JFrame {
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(iconLabel)
                         .addGap(24, 24, 24))))
         );
@@ -208,7 +216,14 @@ public class mood_form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void simpan_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpan_moodActionPerformed
-        // TODO add your handling code here:
+        if(id == 0){
+            database_mood.tambahMood(jComboBox1.getSelectedItem().toString().toLowerCase(), moodinput.getText());
+        }else{
+            database_mood.updateMood(id, jComboBox1.getSelectedItem().toString().toLowerCase(), moodinput.getText());
+        }
+        table_mood FTableMood = new table_mood();
+        FTableMood.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_simpan_moodActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -239,7 +254,41 @@ public class mood_form extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new mood_form().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new mood_form(0).setVisible(true));
+    }
+    
+    private void setData(){
+        try {
+            ResultSet mood = database_mood.cariMood(id);
+            moodinput.setText(mood.getString("title"));
+            jComboBox1.setSelectedItem(kapitalHurufPertama(mood.getString("icon")));
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }   
+    }
+    
+    public String kapitalHurufPertama(String teks) {
+        if (teks == null || teks.isEmpty()) {
+            return teks;
+        }
+        // Mengambil huruf pertama, diubah ke UpperCase + digabung dengan sisa hurufnya
+        return teks.substring(0, 1).toUpperCase() + teks.substring(1);
+    }
+    
+    private void setUkuranLokasi(){
+        // Ambil ukuran layar user (monitor)
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        this.pack();
+        
+        int frameWidth = this.getSize().width;
+        System.out.println(frameWidth);
+        System.out.println(this.getSize().height);
+
+        // Hitung posisi X agar mepet ke kanan
+        int x = screenSize.width - frameWidth;
+        int y = 0; // 0 berarti mepet ke atas
+
+        this.setLocation(x, y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -104,7 +104,7 @@ public class MoodDB {
     }
 
     // SEARCH
-    public void cariMood(int id_mood) {
+    public ResultSet cariMood(int id_mood) {
 
         try {
 
@@ -114,20 +114,10 @@ public class MoodDB {
 
             ps.setInt(1, id_mood);
 
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-
-                System.out.println("ID Mood : " + rs.getInt("id_mood"));
-                System.out.println("Icon    : " + rs.getString("icon"));
-                System.out.println("Title   : " + rs.getString("title"));
-
-            } else {
-                System.out.println("Mood tidak ditemukan");
-            }
-
+            return ps.executeQuery();
         } catch (Exception e) {
             System.out.println("Cari Error : " + e.getMessage());
+            return null;
         }
     }
 }

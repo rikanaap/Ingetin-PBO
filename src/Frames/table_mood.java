@@ -4,6 +4,8 @@
  */
 package Frames;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nabil
@@ -127,6 +129,7 @@ public class table_mood extends javax.swing.JFrame {
         tambah_mood.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
         tambah_mood.setText("Tambah data mood");
         tambah_mood.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        tambah_mood.addActionListener(this::tambah_moodActionPerformed);
 
         update_mood.setBackground(new java.awt.Color(234, 227, 227));
         update_mood.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
@@ -198,12 +201,26 @@ public class table_mood extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void update_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_moodActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+   
+        if (selectedRow != -1) {
+            mood_form FMoodForm = new mood_form(0); //0 tu ngasih tau kalau create, simpelnya begitu
+            FMoodForm.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tidak ada kolom yang di pilih!");
+        }
     }//GEN-LAST:event_update_moodActionPerformed
 
     private void hapus_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapus_moodActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hapus_moodActionPerformed
+
+    private void tambah_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambah_moodActionPerformed
+        mood_form FMoodForm = new mood_form(0); //0 tu ngasih tau kalau create, simpelnya begitu
+        FMoodForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_tambah_moodActionPerformed
 
     /**
      * @param args the command line arguments

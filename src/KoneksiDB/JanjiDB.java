@@ -56,7 +56,12 @@ public class JanjiDB {
 
         try {
 
-            String sql = "SELECT janji.*, mood.icon AS icon FROM janji JOIN mood ON janji.id_mood = mood.id_mood";
+            String sql = "SELECT janji.*, mood.icon AS icon, " +
+                 "EXISTS(SELECT 1 FROM alarm WHERE alarm.id_janji = janji.id_janji) AS alarm " +
+                 "FROM janji " +
+                 "JOIN mood ON janji.id_mood = mood.id_mood " +
+                 "WHERE date = '" + Global.tanggal + "' " +
+                 "ORDER BY hour DESC";
 
             PreparedStatement ps = con.prepareStatement(sql);
 
@@ -68,6 +73,38 @@ public class JanjiDB {
             System.out.println("Tampil Error : " + e.getMessage());
             return null;
         }
+    }
+    
+    public boolean toggleFinish(int id_janji){
+        try {
+        ResultSet data = cariJanji(id_janji);
+        
+        // Cek dan pindahkan kursor ke baris pertama data
+        if (data != null && data.next()) {
+            // Ambil nilai status finished saat ini
+            boolean currentStatus = data.getBoolean("finished");
+            System.out.println("Status saat ini: " + currentStatus);
+            
+            // Balik nilainya (toggle)
+            boolean newStatus = !currentStatus;
+
+            String sql = "UPDATE janji SET finished=? WHERE id_janji=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setBoolean(1, newStatus);
+            ps.setInt(2, id_janji);
+
+            ps.executeUpdate();
+            return newStatus; // Kembalikan status yang baru
+        } else {
+            System.out.println("Data janji dengan ID " + id_janji + " tidak ditemukan.");
+            return false;
+        }
+    } catch(Exception e) {
+        System.out.println("Toggle Error : " + e.getMessage());
+        e.printStackTrace(); // Bagus untuk debugging melihat baris error detail
+        return false;
+    }
     }
 
     // UPDATE
@@ -130,7 +167,7 @@ public class JanjiDB {
     }
 
     // SEARCH BY ID
-    public void cariJanji(int id_janji) {
+    public ResultSet cariJanji(int id_janji) {
 
         try {
 
@@ -140,25 +177,11 @@ public class JanjiDB {
 
             ps.setInt(1, id_janji);
 
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-
-                System.out.println("ID       : " + rs.getInt("id_janji"));
-                System.out.println("Janji    : " + rs.getString("appointment"));
-                System.out.println("Tanggal  : " + rs.getDate("date"));
-                System.out.println("Waktu    : "
-                        + rs.getInt("hour") + ":"
-                        + rs.getInt("minute"));
-                System.out.println("Finished : " + rs.getInt("finished"));
-                System.out.println("Mood ID  : " + rs.getInt("id_mood"));
-
-            } else {
-                System.out.println("Data tidak ditemukan");
-            }
+            return ps.executeQuery();
 
         } catch (Exception e) {
             System.out.println("Cari Error : " + e.getMessage());
+            return null;
         }
     }
 }
