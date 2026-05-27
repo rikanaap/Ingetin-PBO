@@ -5,6 +5,9 @@
 package Frames;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -42,7 +45,7 @@ public class table_mood extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableMood = new javax.swing.JTable();
         cari_mood = new javax.swing.JButton();
         tambah_mood = new javax.swing.JButton();
         update_mood = new javax.swing.JButton();
@@ -107,7 +110,7 @@ public class table_mood extends javax.swing.JFrame {
 
         Navbar.add(jPanel1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableMood.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -118,7 +121,7 @@ public class table_mood extends javax.swing.JFrame {
                 "ID", "Icon", "Tittle"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableMood);
 
         cari_mood.setBackground(new java.awt.Color(234, 227, 227));
         cari_mood.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
@@ -201,10 +204,11 @@ public class table_mood extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void update_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_moodActionPerformed
-        int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = tableMood.getSelectedRow();
    
         if (selectedRow != -1) {
-            mood_form FMoodForm = new mood_form(0); //0 tu ngasih tau kalau create, simpelnya begitu
+            int selectedId = Integer.parseInt(tableMood.getValueAt(selectedRow, 1).toString());
+            mood_form FMoodForm = new mood_form(selectedId); //0 tu ngasih tau kalau create, simpelnya begitu
             FMoodForm.setVisible(true);
             this.dispose();
         } else {
@@ -213,7 +217,34 @@ public class table_mood extends javax.swing.JFrame {
     }//GEN-LAST:event_update_moodActionPerformed
 
     private void hapus_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapus_moodActionPerformed
-        // TODO add your handling code here:
+        int row = tableMood.getSelectedRow();
+        
+        if(row==-1){
+            JOptionPane.showMessageDialog(null, "Pilih data yang mau di hapus");
+            
+            return;
+        }
+        
+        String id = tableMood.getValueAt(row, 0).toString();
+        
+        int confirm = JOptionPane.showConfirmDialog(null, "Yakin hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        
+        if(confirm==0){
+            try{
+                Statement st = kon.con.createStatement();
+                
+                String sql = "DELETE FROM db_ingetin" + "WHERE id='" + id + "'";
+                
+                st.executeUpdate(sql);
+                
+                JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+                
+                tampilSemuaData();
+                
+            }catch(Exception e){
+                 JOptionPane.showMessageDialog(null,e.getMessage());
+            }
+        }
     }//GEN-LAST:event_hapus_moodActionPerformed
 
     private void tambah_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambah_moodActionPerformed
@@ -246,6 +277,52 @@ public class table_mood extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new table_mood().setVisible(true));
     }
+    
+     public void tampilSemuaData(){
+        Object header[] ={"ID","Icon","Tittle"};
+        
+         DefaultTableModel data = new DefaultTableModel(null, header);
+        
+        tableMood.setModel(data);
+        try{
+            Statement st = kon.con.createStatement();
+            ResultSet rs =  st.executeQuery("SELECT * FROM db_ingetin");
+            
+            while(rs.next()){
+                String row[] = {rs.getString("id"), rs.getString("icon"), rs.getString("tittle")};
+                data.addRow(row);
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        };
+    }
+    
+    public void cariData(){
+        Object header[] = {"ID","Icon","Tittle"};
+         DefaultTableModel data = new DefaultTableModel(null, header);
+         
+         tableMood.setModel(data);
+         
+         String cari = cariID.getText();
+         
+         try{
+         
+            Statement st = kon.con.createStatement();
+            String sql = "SELECT * FROM db_ingrtin" + "WHERE id LIKE '%" + cari +"%'";
+             
+            ResultSet rs = st.executeQuery(sql);
+             
+            while(rs.next()){
+                String row[] = {rs.getString("id"), rs.getString("icon"), rs.getString("tittle")};
+                
+                data.addRow(row);
+            }
+             
+         }catch(Exception e){
+             JOptionPane.showMessageDialog(null, e.getMessage());
+         }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Navbar;
@@ -263,7 +340,7 @@ public class table_mood extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableMood;
     private javax.swing.JButton tambah_mood;
     private javax.swing.JButton update_mood;
     // End of variables declaration//GEN-END:variables
