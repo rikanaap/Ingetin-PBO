@@ -65,27 +65,27 @@
               </Group>
               <Group type="102" attributes="0">
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="moodinput" min="-2" pref="259" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="simpan_mood" min="-2" pref="123" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="moodinput" min="-2" pref="259" max="-2" attributes="0"/>
-                              <Component id="jLabel8" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="iconLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="simpan_mood" min="-2" pref="123" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="jComboBox1" min="-2" pref="99" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -101,11 +101,14 @@
                       <Component id="jPanel3" min="-2" pref="258" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="iconLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="moodinput" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="jComboBox1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
@@ -114,6 +117,7 @@
                           <Component id="simpan_mood" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -354,12 +358,33 @@
               <Color blue="e3" green="e3" red="ea" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="&#x2b50;"/>
-                <StringItem index="1" value="&#xd83d;&#xdca3;"/>
-                <StringItem index="2" value="&#xd83d;&#xde01;"/>
-                <StringItem index="3" value="&#xd83d;&#xde18;"/>
-                <StringItem index="4" value="&#xd83d;&#xde12;"/>
+              <StringArray count="26">
+                <StringItem index="0" value="Bangga"/>
+                <StringItem index="1" value="Bersalah"/>
+                <StringItem index="2" value="Bingung"/>
+                <StringItem index="3" value="Bosan"/>
+                <StringItem index="4" value="Cemas"/>
+                <StringItem index="5" value="Nyaman"/>
+                <StringItem index="6" value="Frustasi"/>
+                <StringItem index="7" value="Inspirasi"/>
+                <StringItem index="8" value="Kaget"/>
+                <StringItem index="9" value="Kepo"/>
+                <StringItem index="10" value="Kewalahan"/>
+                <StringItem index="11" value="Marah"/>
+                <StringItem index="12" value="Melamun"/>
+                <StringItem index="13" value="Mimpi"/>
+                <StringItem index="14" value="Musisi"/>
+                <StringItem index="15" value="Nakal"/>
+                <StringItem index="16" value="Nostalgia"/>
+                <StringItem index="17" value="Santai"/>
+                <StringItem index="18" value="Sakit"/>
+                <StringItem index="19" value="Semangat"/>
+                <StringItem index="20" value="Malu"/>
+                <StringItem index="21" value="Siap"/>
+                <StringItem index="22" value="Stres"/>
+                <StringItem index="23" value="Bersyukur"/>
+                <StringItem index="24" value="Tenang"/>
+                <StringItem index="25" value="Tidur"/>
               </StringArray>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -371,9 +396,14 @@
               <Dimension value="[72, 31]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="iconLabel">
         </Component>
       </SubComponents>
     </Container>
