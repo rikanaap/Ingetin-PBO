@@ -120,4 +120,25 @@ public class MoodDB {
             return null;
         }
     }
+    
+    // CARI MOOD BERDASARKAN TITLE
+    public ResultSet cariMood(String title) {
+
+        try {
+
+            String sql = "SELECT * FROM mood WHERE title LIKE ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, "%" + title + "%");
+
+            return ps.executeQuery();
+
+        } catch (Exception e) {
+
+            System.out.println("Cari Error : " + e.getMessage());
+
+            return null;
+        }
+    }
 }
