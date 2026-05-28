@@ -291,7 +291,7 @@ public class table_mood extends javax.swing.JFrame {
             while (rs.next()) {
 
                 String row[] = {
-                    rs.getString("id"),
+                    rs.getString("id_mood"),
                     rs.getString("icon"),
                     rs.getString("title")
                 };
@@ -347,7 +347,7 @@ public class table_mood extends javax.swing.JFrame {
             ResultSet rs =  database_mood.tampilMood();
             
             while(rs.next()){
-                String row[] = {rs.getString("id"), rs.getString("icon"), rs.getString("title")};
+                String row[] = {rs.getString("id_mood"), rs.getString("icon"), rs.getString("title")};
                 data.addRow(row);
             }
             
