@@ -9,6 +9,10 @@ import java.awt.HeadlessException;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Timer;
 
 /**
  *
@@ -27,10 +31,14 @@ public class mood_form extends javax.swing.JFrame {
         initComponents();
         database_mood = new MoodDB();
         id = id_mood;
-        
+        System.out.println(id_mood);
         if(id_mood != 0) setData();
         setIconMood("bangga");
         setUkuranLokasi();
+        
+        updateWaktu();
+        Timer timer = new Timer(60000, e -> updateWaktu());
+        timer.start();
     }
 
     /**
@@ -63,7 +71,7 @@ public class mood_form extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        L_Hour = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         iconLabel = new javax.swing.JLabel();
@@ -95,6 +103,11 @@ public class mood_form extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Garamond", 1, 15)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Back.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel5);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -102,14 +115,19 @@ public class mood_form extends javax.swing.JFrame {
         jLabel6.setText("INGETIN");
         jLabel6.setToolTipText("");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel6);
 
-        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel9.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel9.setText("21 Mei, 09:00");
-        jLabel9.setPreferredSize(new java.awt.Dimension(260, 20));
-        jPanel1.add(jLabel9);
+        L_Hour.setBackground(new java.awt.Color(0, 0, 0));
+        L_Hour.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
+        L_Hour.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        L_Hour.setText("21 Mei, 09:00");
+        L_Hour.setPreferredSize(new java.awt.Dimension(260, 20));
+        jPanel1.add(L_Hour);
 
         Navbar.add(jPanel1);
 
@@ -232,6 +250,14 @@ public class mood_form extends javax.swing.JFrame {
         setIconMood(mood);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        back();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        back();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -260,8 +286,13 @@ public class mood_form extends javax.swing.JFrame {
     private void setData(){
         try {
             ResultSet mood = database_mood.cariMood(id);
-            moodinput.setText(mood.getString("title"));
-            jComboBox1.setSelectedItem(kapitalHurufPertama(mood.getString("icon")));
+            if (mood != null && mood.next()) { 
+                System.out.println(mood.getString("title"));
+                moodinput.setText(mood.getString("title"));
+                jComboBox1.setSelectedItem(kapitalHurufPertama(mood.getString("icon")));
+            } else {
+                System.out.println("Data mood dengan ID tersebut tidak ditemukan.");
+            }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }   
@@ -290,16 +321,29 @@ public class mood_form extends javax.swing.JFrame {
 
         this.setLocation(x, y);
     }
+    
+     private void back(){
+        table_mood FTableMood = new table_mood();
+        FTableMood.setVisible(true);
+        this.dispose();
+    }
+     
+    public LocalTime waktu;
+    private void updateWaktu(){
+         LocalDateTime sekarang = LocalDateTime.now();
+         L_Hour.setText(sekarang.format(DateTimeFormatter.ofPattern("dd MMMM, HH:mm")));
+         waktu = LocalTime.now();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
+    private javax.swing.JLabel L_Hour;
     private javax.swing.JPanel Navbar;
     private javax.swing.JLabel iconLabel;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;

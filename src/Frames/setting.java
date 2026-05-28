@@ -182,7 +182,9 @@ public class setting extends javax.swing.JFrame {
     }//GEN-LAST:event_atur_motivasiActionPerformed
 
     private void atur_moodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atur_moodMouseClicked
-        // TODO add your handling code here:
+        table_mood FTableMood = new table_mood();
+        FTableMood.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_atur_moodMouseClicked
 
     private void atur_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atur_moodActionPerformed

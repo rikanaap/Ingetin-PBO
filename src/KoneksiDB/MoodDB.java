@@ -105,7 +105,6 @@ public class MoodDB {
 
     // SEARCH
     public ResultSet cariMood(int id_mood) {
-
         try {
 
             String sql = "SELECT * FROM mood WHERE id_mood=?";
