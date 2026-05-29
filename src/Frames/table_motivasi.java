@@ -4,6 +4,15 @@
  */
 package Frames;
 
+import KoneksiDB.MotivasiDB;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Timer;
+
 /**
  *
  * @author ASUS
@@ -15,8 +24,18 @@ public class table_motivasi extends javax.swing.JFrame {
     /**
      * Creates new form table_motivasi
      */
+    
+    private MotivasiDB database_motivasi;
+    
     public table_motivasi() {
         initComponents();
+        database_motivasi = new MotivasiDB();
+        tampilSemuaData();
+        setUkuranLokasi();
+        
+        updateWaktu();
+        Timer timer = new Timer(60000, e -> updateWaktu());
+        timer.start();
     }
 
     /**
@@ -28,20 +47,76 @@ public class table_motivasi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        Background = new javax.swing.JPanel();
+        Navbar = new javax.swing.JPanel();
+        isi_navbar = new javax.swing.JPanel();
+        BTN_Back = new javax.swing.JLabel();
+        AppName = new javax.swing.JLabel();
+        L_Hour = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableMotivasi = new javax.swing.JTable();
-        Navbar = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        BTN_Back = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         cari_motivasi = new javax.swing.JButton();
         tambah_motivasi = new javax.swing.JButton();
         update_motivasi = new javax.swing.JButton();
         hapus_motivasi = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        Title = new javax.swing.JLabel();
+        tampil_motivasi = new javax.swing.JButton();
+        inputID = new javax.swing.JTextField();
+        SubTitle = new javax.swing.JLabel();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Background.setBackground(new java.awt.Color(234, 227, 227));
+        Background.setName("kumpulan mood"); // NOI18N
+        Background.setPreferredSize(new java.awt.Dimension(580, 360));
+
+        Navbar.setBackground(new java.awt.Color(215, 182, 244));
+        Navbar.setMaximumSize(null);
+        Navbar.setPreferredSize(new java.awt.Dimension(400, 60));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 18);
+        flowLayout1.setAlignOnBaseline(true);
+        Navbar.setLayout(flowLayout1);
+
+        isi_navbar.setMaximumSize(null);
+        isi_navbar.setMinimumSize(new java.awt.Dimension(530, 24));
+        isi_navbar.setOpaque(false);
+        isi_navbar.setPreferredSize(new java.awt.Dimension(570, 24));
+        isi_navbar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 13, 0));
+
+        BTN_Back.setFont(new java.awt.Font("Garamond", 1, 15)); // NOI18N
+        BTN_Back.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BTN_Back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Back.png"))); // NOI18N
+        BTN_Back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTN_BackMouseClicked(evt);
+            }
+        });
+        isi_navbar.add(BTN_Back);
+
+        AppName.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        AppName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AppName.setText("INGETIN");
+        AppName.setToolTipText("");
+        AppName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AppName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AppNameMouseClicked(evt);
+            }
+        });
+        isi_navbar.add(AppName);
+
+        L_Hour.setBackground(new java.awt.Color(0, 0, 0));
+        L_Hour.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
+        L_Hour.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        L_Hour.setText("21 Mei, 09:00");
+        L_Hour.setPreferredSize(new java.awt.Dimension(420, 20));
+        isi_navbar.add(L_Hour);
+
+        Navbar.add(isi_navbar);
 
         tableMotivasi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -51,166 +126,198 @@ public class table_motivasi extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "ID", "Icon", "Tittle"
+                "ID", "Name", "Parameter"
             }
         ));
         jScrollPane1.setViewportView(tableMotivasi);
 
-        Navbar.setBackground(new java.awt.Color(215, 182, 244));
-        Navbar.setMaximumSize(null);
-        Navbar.setPreferredSize(new java.awt.Dimension(400, 60));
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 18);
-        flowLayout1.setAlignOnBaseline(true);
-        Navbar.setLayout(flowLayout1);
-
-        jPanel1.setMaximumSize(null);
-        jPanel1.setMinimumSize(new java.awt.Dimension(530, 24));
-        jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(570, 24));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 13, 0));
-
-        BTN_Back.setFont(new java.awt.Font("Garamond", 1, 15)); // NOI18N
-        BTN_Back.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BTN_Back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Back.png"))); // NOI18N
-        jPanel1.add(BTN_Back);
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("INGETIN");
-        jLabel6.setToolTipText("");
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel6);
-
-        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel9.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel9.setText("21 Mei, 09:00");
-        jLabel9.setPreferredSize(new java.awt.Dimension(420, 20));
-        jPanel1.add(jLabel9);
-
-        Navbar.add(jPanel1);
-
         cari_motivasi.setBackground(new java.awt.Color(234, 227, 227));
         cari_motivasi.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        cari_motivasi.setText("Cari motivasi");
+        cari_motivasi.setText("Cari Motivasi");
         cari_motivasi.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cari_motivasi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cari_motivasiMouseClicked(evt);
-            }
-        });
         cari_motivasi.addActionListener(this::cari_motivasiActionPerformed);
 
         tambah_motivasi.setBackground(new java.awt.Color(234, 227, 227));
         tambah_motivasi.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        tambah_motivasi.setText("Tambah motivasi");
+        tambah_motivasi.setText("Tambah Motivasi");
         tambah_motivasi.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        tambah_motivasi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tambah_motivasiMouseClicked(evt);
-            }
-        });
         tambah_motivasi.addActionListener(this::tambah_motivasiActionPerformed);
 
         update_motivasi.setBackground(new java.awt.Color(234, 227, 227));
         update_motivasi.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        update_motivasi.setText("Update motivasi");
+        update_motivasi.setText("Update Motivasi");
         update_motivasi.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        update_motivasi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                update_motivasiMouseClicked(evt);
-            }
-        });
         update_motivasi.addActionListener(this::update_motivasiActionPerformed);
 
         hapus_motivasi.setBackground(new java.awt.Color(234, 227, 227));
         hapus_motivasi.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        hapus_motivasi.setText("Hapus motivasi");
+        hapus_motivasi.setText("Hapus Motivasi");
         hapus_motivasi.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        hapus_motivasi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                hapus_motivasiMouseClicked(evt);
-            }
-        });
         hapus_motivasi.addActionListener(this::hapus_motivasiActionPerformed);
 
-        jLabel1.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel1.setText("KUMPULAN MOTIVASI KAMU");
+        Title.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        Title.setText("KUMPULAN MOTIVASI KAMU");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        tampil_motivasi.setBackground(new java.awt.Color(234, 227, 227));
+        tampil_motivasi.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
+        tampil_motivasi.setText("Tampil Motivasi");
+        tampil_motivasi.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        tampil_motivasi.addActionListener(this::tampil_motivasiActionPerformed);
+
+        SubTitle.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
+        SubTitle.setText("Cari motivasi kamu berdasarkan ID");
+
+        javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
+        Background.setLayout(BackgroundLayout);
+        BackgroundLayout.setHorizontalGroup(
+            BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tambah_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cari_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(update_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hapus_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(162, 162, 162))
+            .addGroup(BackgroundLayout.createSequentialGroup()
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addContainerGap(138, Short.MAX_VALUE)
+                        .addComponent(Title))
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SubTitle)
+                            .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                                .addComponent(inputID)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cari_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tambah_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(update_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(hapus_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tampil_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        BackgroundLayout.setVerticalGroup(
+            BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BackgroundLayout.createSequentialGroup()
                 .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(Title)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(SubTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inputID)
+                    .addComponent(cari_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cari_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addComponent(tampil_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tambah_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(update_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(hapus_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 64, Short.MAX_VALUE))
+                        .addComponent(hapus_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void update_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_motivasiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_update_motivasiActionPerformed
+    private void BTN_BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_BackMouseClicked
+        back();
+    }//GEN-LAST:event_BTN_BackMouseClicked
 
-    private void hapus_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapus_motivasiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hapus_motivasiActionPerformed
+    private void AppNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AppNameMouseClicked
+        back();
+    }//GEN-LAST:event_AppNameMouseClicked
 
     private void cari_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_motivasiActionPerformed
         // TODO add your handling code here:
+        Object header[] = {"ID", "Name", "Parameter"};
+
+        DefaultTableModel data = new DefaultTableModel(null, header);
+
+        tableMotivasi.setModel(data);
+
+        try {
+
+            int id = Integer.parseInt(inputID.getText());
+
+            ResultSet rs = database_motivasi.cariMotivasi(id);
+
+            while (rs.next()) {
+
+                String row[] = {
+                    rs.getString("id"),
+                    rs.getString("name"),
+                    rs.getString("parameter")
+                };
+
+                data.addRow(row);
+            }
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        }
     }//GEN-LAST:event_cari_motivasiActionPerformed
 
-    private void cari_motivasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cari_motivasiMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cari_motivasiMouseClicked
-
     private void tambah_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambah_motivasiActionPerformed
-        // TODO add your handling code here:
+        motivasi_form FMotivasiForm = new motivasi_form(0); //0 tu ngasih tau kalau create, simpelnya begitu
+        FMotivasiForm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_tambah_motivasiActionPerformed
 
-    private void tambah_motivasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tambah_motivasiMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tambah_motivasiMouseClicked
+    private void update_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_motivasiActionPerformed
+        int selectedRow = tableMotivasi.getSelectedRow();
 
-    private void update_motivasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_update_motivasiMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_update_motivasiMouseClicked
+        if (selectedRow != -1) {
+            int selectedId = Integer.parseInt(tableMotivasi.getValueAt(selectedRow, 0).toString());
+            motivasi_form FMotivasiForm = new motivasi_form(selectedId); //0 tu ngasih tau kalau create, simpelnya begitu
+            FMotivasiForm.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tidak ada kolom yang di pilih!");
+        }
+    }//GEN-LAST:event_update_motivasiActionPerformed
 
-    private void hapus_motivasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hapus_motivasiMouseClicked
+    private void hapus_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapus_motivasiActionPerformed
+        int row = tableMotivasi.getSelectedRow();
+
+        if(row == -1){
+            JOptionPane.showMessageDialog(null, "Pilih data yang mau di hapus");
+
+            return;
+        }
+
+        int id = Integer.parseInt(tableMotivasi.getValueAt(row, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(null, "Yakin hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+        if(confirm == 0){
+            database_motivasi.hapusMotivasi(id);
+            JOptionPane.showMessageDialog(null,"Data berhasil dihapus");
+            tampilSemuaData();
+        }
+    }//GEN-LAST:event_hapus_motivasiActionPerformed
+
+    private void tampil_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tampil_motivasiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_hapus_motivasiMouseClicked
+        tampilSemuaData();
+    }//GEN-LAST:event_tampil_motivasiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,19 +343,73 @@ public class table_motivasi extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new table_motivasi().setVisible(true));
     }
+    
+    public void tampilSemuaData(){
+        Object header[] ={"ID","Name","Parameter"};
+        
+        DefaultTableModel data = new DefaultTableModel(null, header);
+        
+        tableMotivasi.setModel(data);
+        
+        try{
+            ResultSet rs =  database_motivasi.tampilMotivasi();
+            
+            while(rs.next()){
+                String row[] = {rs.getString("id"), rs.getString("name"), rs.getString("parameter")};
+                data.addRow(row);
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        };
+    }
+     
+    private void back(){
+        setting FSetting = new setting();
+        FSetting.setVisible(true);
+        this.dispose();
+    }
+     
+    private void setUkuranLokasi(){
+        // Ambil ukuran layar user (monitor)
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        this.pack();
+        
+        int frameWidth = this.getSize().width;
+        System.out.println(frameWidth);
+        System.out.println(this.getSize().height);
+
+        // Hitung posisi X agar mepet ke kanan
+        int x = screenSize.width - frameWidth;
+        int y = 0; // 0 berarti mepet ke atas
+
+        this.setLocation(x, y);
+    }
+     
+    public LocalTime waktu;
+    private void updateWaktu(){
+         LocalDateTime sekarang = LocalDateTime.now();
+         L_Hour.setText(sekarang.format(DateTimeFormatter.ofPattern("dd MMMM, HH:mm")));
+         waktu = LocalTime.now();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AppName;
     private javax.swing.JLabel BTN_Back;
+    private javax.swing.JPanel Background;
+    private javax.swing.JLabel L_Hour;
     private javax.swing.JPanel Navbar;
+    private javax.swing.JLabel SubTitle;
+    private javax.swing.JLabel Title;
     private javax.swing.JButton cari_motivasi;
     private javax.swing.JButton hapus_motivasi;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField inputID;
+    private javax.swing.JPanel isi_navbar;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableMotivasi;
     private javax.swing.JButton tambah_motivasi;
+    private javax.swing.JButton tampil_motivasi;
     private javax.swing.JButton update_motivasi;
     // End of variables declaration//GEN-END:variables
 }

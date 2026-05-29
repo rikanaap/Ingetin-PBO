@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Frames;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Timer;
 
 /**
  *
@@ -18,6 +22,10 @@ public class setting extends javax.swing.JFrame {
     public setting() {
         initComponents();
         setUkuranLokasi();
+                
+        updateWaktu();
+        Timer timer = new Timer(60000, e -> updateWaktu());
+        timer.start();
     }
 
     /**
@@ -29,21 +37,26 @@ public class setting extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Background = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         atur_motivasi = new javax.swing.JButton();
         Navbar = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        isi_navbar = new javax.swing.JPanel();
         BTN_Back = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        AppName = new javax.swing.JLabel();
+        L_Hour = new javax.swing.JLabel();
+        desain_setting = new javax.swing.JPanel();
+        IMG_Atur = new javax.swing.JLabel();
+        text_bubble2 = new javax.swing.JLabel();
+        IMG_Bubble = new javax.swing.JLabel();
+        text_bubble1 = new javax.swing.JLabel();
         atur_mood = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("setting");
+
+        Background.setBackground(new java.awt.Color(233, 225, 225));
+        Background.setPreferredSize(new java.awt.Dimension(400, 330));
 
         atur_motivasi.setFont(new java.awt.Font("Segoe UI Emoji", 1, 15)); // NOI18N
         atur_motivasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Motivasi.png"))); // NOI18N
@@ -60,14 +73,14 @@ public class setting extends javax.swing.JFrame {
 
         Navbar.setBackground(new java.awt.Color(215, 182, 244));
         Navbar.setMaximumSize(null);
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 18);
-        flowLayout1.setAlignOnBaseline(true);
-        Navbar.setLayout(flowLayout1);
+        Navbar.setPreferredSize(new java.awt.Dimension(400, 60));
+        java.awt.FlowLayout flowLayout3 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 18);
+        flowLayout3.setAlignOnBaseline(true);
+        Navbar.setLayout(flowLayout3);
 
-        jPanel3.setMaximumSize(null);
-        jPanel3.setOpaque(false);
-        jPanel3.setPreferredSize(new java.awt.Dimension(400, 24));
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 13, 0));
+        isi_navbar.setMaximumSize(null);
+        isi_navbar.setOpaque(false);
+        isi_navbar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 13, 0));
 
         BTN_Back.setFont(new java.awt.Font("Garamond", 1, 15)); // NOI18N
         BTN_Back.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -77,56 +90,59 @@ public class setting extends javax.swing.JFrame {
                 BTN_BackMouseClicked(evt);
             }
         });
-        jPanel3.add(BTN_Back);
+        isi_navbar.add(BTN_Back);
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("INGETIN");
-        jLabel8.setToolTipText("");
-        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(jLabel8);
+        AppName.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        AppName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AppName.setText("INGETIN");
+        AppName.setToolTipText("");
+        AppName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AppName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AppNameMouseClicked(evt);
+            }
+        });
+        isi_navbar.add(AppName);
 
-        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel9.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel9.setText("21 Mei, 09:00");
-        jLabel9.setPreferredSize(new java.awt.Dimension(260, 20));
-        jPanel3.add(jLabel9);
+        L_Hour.setBackground(new java.awt.Color(0, 0, 0));
+        L_Hour.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
+        L_Hour.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        L_Hour.setText("21 Mei, 09:00");
+        L_Hour.setPreferredSize(new java.awt.Dimension(260, 20));
+        isi_navbar.add(L_Hour);
 
-        Navbar.add(jPanel3);
+        Navbar.add(isi_navbar);
 
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(null);
+        desain_setting.setOpaque(false);
+        desain_setting.setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Atur.png"))); // NOI18N
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 60, 160, 90);
+        IMG_Atur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Atur.png"))); // NOI18N
+        desain_setting.add(IMG_Atur);
+        IMG_Atur.setBounds(120, 60, 159, 87);
 
-        jLabel10.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 0, 88));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("dan mood kamu!");
-        jLabel10.setAlignmentY(0.1F);
-        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel10.setMinimumSize(new java.awt.Dimension(270, 21));
-        jLabel10.setRequestFocusEnabled(false);
-        jPanel2.add(jLabel10);
-        jLabel10.setBounds(140, 30, 110, 40);
+        text_bubble2.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
+        text_bubble2.setForeground(new java.awt.Color(51, 0, 88));
+        text_bubble2.setText("dan mood kamu!");
+        text_bubble2.setAlignmentY(0.1F);
+        text_bubble2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        text_bubble2.setMinimumSize(new java.awt.Dimension(270, 21));
+        text_bubble2.setRequestFocusEnabled(false);
+        desain_setting.add(text_bubble2);
+        text_bubble2.setBounds(40, 40, 92, 40);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Bubble3.png"))); // NOI18N
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(130, 10, 139, 75);
+        IMG_Bubble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Bubble.png"))); // NOI18N
+        desain_setting.add(IMG_Bubble);
+        IMG_Bubble.setBounds(10, 10, 170, 90);
 
-        jLabel11.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(51, 0, 88));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Ayok atur motivasi");
-        jLabel11.setAlignmentY(0.1F);
-        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel11.setMinimumSize(new java.awt.Dimension(270, 21));
-        jLabel11.setRequestFocusEnabled(false);
-        jPanel2.add(jLabel11);
-        jLabel11.setBounds(140, 10, 110, 40);
+        text_bubble1.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
+        text_bubble1.setForeground(new java.awt.Color(51, 0, 88));
+        text_bubble1.setText("Yuk atur motivasi");
+        text_bubble1.setAlignmentY(0.1F);
+        text_bubble1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        text_bubble1.setMinimumSize(new java.awt.Dimension(270, 21));
+        text_bubble1.setRequestFocusEnabled(false);
+        desain_setting.add(text_bubble1);
+        text_bubble1.setBounds(50, 30, 92, 40);
 
         atur_mood.setFont(new java.awt.Font("Segoe UI Emoji", 1, 15)); // NOI18N
         atur_mood.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Mood.png"))); // NOI18N
@@ -141,32 +157,55 @@ public class setting extends javax.swing.JFrame {
         });
         atur_mood.addActionListener(this::atur_moodActionPerformed);
 
+        javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
+        Background.setLayout(BackgroundLayout);
+        BackgroundLayout.setHorizontalGroup(
+            BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BackgroundLayout.createSequentialGroup()
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BackgroundLayout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(atur_motivasi)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(atur_mood))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BackgroundLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(desain_setting, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(434, 434, 434)
+                        .addComponent(jLabel3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        BackgroundLayout.setVerticalGroup(
+            BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BackgroundLayout.createSequentialGroup()
+                .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(222, 222, 222))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
+                        .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(atur_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(atur_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(desain_setting, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(atur_motivasi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(atur_mood, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(atur_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                    .addComponent(atur_mood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+            .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -178,22 +217,29 @@ public class setting extends javax.swing.JFrame {
     }//GEN-LAST:event_atur_motivasiMouseClicked
 
     private void atur_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atur_motivasiActionPerformed
-        
+        table_motivasi FTableMotivasi = new table_motivasi();
+        FTableMotivasi.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_atur_motivasiActionPerformed
 
+    private void BTN_BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_BackMouseClicked
+        back();
+    }//GEN-LAST:event_BTN_BackMouseClicked
+
+    private void AppNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AppNameMouseClicked
+        back();
+    }//GEN-LAST:event_AppNameMouseClicked
+
     private void atur_moodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atur_moodMouseClicked
-        table_mood FTableMood = new table_mood();
-        FTableMood.setVisible(true);
-        this.dispose();
+        // TODO add your handling code here:
     }//GEN-LAST:event_atur_moodMouseClicked
 
     private void atur_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atur_moodActionPerformed
         // TODO add your handling code here:
+        table_mood FTableMood = new table_mood();
+        FTableMood.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_atur_moodActionPerformed
-
-    private void BTN_BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_BackMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTN_BackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -220,7 +266,7 @@ public class setting extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new setting().setVisible(true));
     }
     
-     private void setUkuranLokasi(){
+    private void setUkuranLokasi(){
         // Ambil ukuran layar user (monitor)
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         this.pack();
@@ -235,19 +281,34 @@ public class setting extends javax.swing.JFrame {
 
         this.setLocation(x, y);
     }
+    
+    private void back(){
+        Kalender FKalender = new Kalender();
+        FKalender.setVisible(true);
+        this.dispose();
+    }
+    
+    public LocalTime waktu;
+    private void updateWaktu(){
+         LocalDateTime sekarang = LocalDateTime.now();
+         L_Hour.setText(sekarang.format(DateTimeFormatter.ofPattern("dd MMMM, HH:mm")));
+         waktu = LocalTime.now();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AppName;
     private javax.swing.JLabel BTN_Back;
+    private javax.swing.JPanel Background;
+    private javax.swing.JLabel IMG_Atur;
+    private javax.swing.JLabel IMG_Bubble;
+    private javax.swing.JLabel L_Hour;
     private javax.swing.JPanel Navbar;
     private javax.swing.JButton atur_mood;
     private javax.swing.JButton atur_motivasi;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JPanel desain_setting;
+    private javax.swing.JPanel isi_navbar;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel text_bubble1;
+    private javax.swing.JLabel text_bubble2;
     // End of variables declaration//GEN-END:variables
 }

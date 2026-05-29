@@ -104,7 +104,7 @@ public class MotivasiDB {
     }
 
     // SEARCH
-    public void cariMotivasi(int id_motivasi) {
+    public ResultSet cariMotivasi(int id_motivasi) {
 
         try {
 
@@ -114,20 +114,11 @@ public class MotivasiDB {
 
             ps.setInt(1, id_motivasi);
 
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-
-                System.out.println("ID Motivasi : " + rs.getInt("id_motivasi"));
-                System.out.println("Name        : " + rs.getString("name"));
-                System.out.println("Parameter   : " + rs.getInt("parameter"));
-
-            } else {
-                System.out.println("Motivasi tidak ditemukan");
-            }
-
+            return ps.executeQuery();
+            
         } catch (Exception e) {
             System.out.println("Cari Error : " + e.getMessage());
+            return null;
         }
     }
 }
