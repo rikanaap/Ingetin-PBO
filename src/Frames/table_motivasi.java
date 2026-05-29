@@ -260,7 +260,7 @@ public class table_motivasi extends javax.swing.JFrame {
             while (rs.next()) {
 
                 String row[] = {
-                    rs.getString("id"),
+                    rs.getString("id_motivasi"),
                     rs.getString("name"),
                     rs.getString("parameter")
                 };
@@ -355,7 +355,7 @@ public class table_motivasi extends javax.swing.JFrame {
             ResultSet rs =  database_motivasi.tampilMotivasi();
             
             while(rs.next()){
-                String row[] = {rs.getString("id"), rs.getString("name"), rs.getString("parameter")};
+                String row[] = {rs.getString("id_motivasi"), rs.getString("name"), rs.getString("parameter")};
                 data.addRow(row);
             }
             
