@@ -178,6 +178,7 @@ public class janji_form extends javax.swing.JFrame {
         CB_Mood.setFont(new java.awt.Font("Corbel", 0, 12)); // NOI18N
         CB_Mood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_Mood.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        CB_Mood.addActionListener(this::CB_MoodActionPerformed);
 
         BTN_Simpan.setBackground(new java.awt.Color(234, 227, 227));
         BTN_Simpan.setFont(new java.awt.Font("Corbel", 0, 15)); // NOI18N
@@ -333,6 +334,10 @@ public class janji_form extends javax.swing.JFrame {
     private void BTN_BatalkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BatalkanActionPerformed
         this.dispose();
     }//GEN-LAST:event_BTN_BatalkanActionPerformed
+
+    private void CB_MoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_MoodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_MoodActionPerformed
 
     /**
      * @param args the command line arguments

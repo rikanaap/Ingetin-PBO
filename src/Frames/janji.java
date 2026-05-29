@@ -68,7 +68,7 @@ public class janji extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        BTN_SetelAlarm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingetin - Janji");
@@ -195,16 +195,16 @@ public class janji extends javax.swing.JFrame {
         jPanel2.add(jLabel1);
         jLabel1.setBounds(20, 50, 144, 144);
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Motivasi.png"))); // NOI18N
-        jButton2.setText("<html>Setel Alarm</html>");
-        jButton2.setToolTipText("");
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(this::jButton2ActionPerformed);
-        jPanel2.add(jButton2);
-        jButton2.setBounds(190, 100, 98, 96);
+        BTN_SetelAlarm.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        BTN_SetelAlarm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Motivasi.png"))); // NOI18N
+        BTN_SetelAlarm.setText("<html>Setel Alarm</html>");
+        BTN_SetelAlarm.setToolTipText("");
+        BTN_SetelAlarm.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        BTN_SetelAlarm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BTN_SetelAlarm.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BTN_SetelAlarm.addActionListener(this::BTN_SetelAlarmActionPerformed);
+        jPanel2.add(BTN_SetelAlarm);
+        BTN_SetelAlarm.setBounds(190, 100, 98, 96);
 
         jPanel3.add(jPanel2);
 
@@ -238,9 +238,10 @@ public class janji extends javax.swing.JFrame {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BTN_SetelAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SetelAlarmActionPerformed
+        Setel_alarm_1 F_Setel_alarm_1 = new Setel_alarm_1();
+        F_Setel_alarm_1.setVisible(true);
+    }//GEN-LAST:event_BTN_SetelAlarmActionPerformed
 
     private void BTN_TambahIngatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_TambahIngatanActionPerformed
         janji_form F_JanjiForm = new janji_form();
@@ -383,6 +384,7 @@ public class janji extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTN_SetelAlarm;
     private javax.swing.JButton BTN_TambahIngatan;
     private javax.swing.JPanel Background;
     private javax.swing.JLabel L_Hour;
@@ -390,7 +392,6 @@ public class janji extends javax.swing.JFrame {
     private javax.swing.JPanel Navbar;
     private javax.swing.JPanel P_CardFlow;
     private javax.swing.JScrollPane P_CardFlow3;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
