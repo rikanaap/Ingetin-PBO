@@ -298,18 +298,18 @@ public class table_motivasi extends javax.swing.JFrame {
         int row = tableMotivasi.getSelectedRow();
 
         if(row == -1){
-            JOptionPane.showMessageDialog(null, "Pilih data yang mau di hapus");
+            JOptionPane.showMessageDialog(this, "Pilih data yang mau di hapus");
 
             return;
         }
 
         int id = Integer.parseInt(tableMotivasi.getValueAt(row, 0).toString());
 
-        int confirm = JOptionPane.showConfirmDialog(null, "Yakin hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
 
         if(confirm == 0){
             database_motivasi.hapusMotivasi(id);
-            JOptionPane.showMessageDialog(null,"Data berhasil dihapus");
+            JOptionPane.showMessageDialog(this,"Data berhasil dihapus");
             tampilSemuaData();
         }
     }//GEN-LAST:event_hapus_motivasiActionPerformed

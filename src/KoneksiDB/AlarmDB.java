@@ -24,7 +24,7 @@ public AlarmDB() {
 public java.sql.ResultSet ambilSemuaJanji() {
     java.sql.ResultSet rs = null;
     try {
-        String sql = "SELECT appointment FROM janji"; 
+        String sql = "SELECT appointment FROM janji WHERE date='"+ Global.tanggal +"'"; 
         java.sql.Statement stmt = con.createStatement(); 
         rs = stmt.executeQuery(sql);
     } catch (Exception e) {
@@ -66,5 +66,25 @@ public int cariIDJanji(String teksJanji) {
     }
     return id;
 }
+
+    public void hapusAlarm(int id_janji) {
+
+        try {
+
+            String sql = "DELETE FROM alarm WHERE id_janji=?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, id_janji);
+
+            ps.executeUpdate();
+
+            System.out.println("Alarm berhasil dihapus");
+
+        } catch (Exception e) {
+            System.out.println("Hapus Error : " + e.getMessage());
+        }
+    }
+
 }
     

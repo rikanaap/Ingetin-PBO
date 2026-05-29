@@ -70,7 +70,7 @@ public class janji extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         BTN_SetelAlarm = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ingetin - Janji");
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
@@ -241,6 +241,7 @@ public class janji extends javax.swing.JFrame {
     private void BTN_SetelAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SetelAlarmActionPerformed
         Setel_alarm_1 F_Setel_alarm_1 = new Setel_alarm_1();
         F_Setel_alarm_1.setVisible(true);
+        F_Setel_alarm_1.setJanjiForm(this);
     }//GEN-LAST:event_BTN_SetelAlarmActionPerformed
 
     private void BTN_TambahIngatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_TambahIngatanActionPerformed

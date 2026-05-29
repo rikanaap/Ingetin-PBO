@@ -4,10 +4,12 @@
  */
 package Frames;
 
+import KoneksiDB.AlarmDB;
 import KoneksiDB.JanjiDB;
 import java.awt.Color;
 import java.net.URL;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,9 +22,12 @@ public class P_CardJanji extends javax.swing.JPanel {
      */
     private static int id;
     private JanjiDB database_janji;
+    private AlarmDB database_alarm;
+    
     public P_CardJanji(int id_String) {
         initComponents();
         database_janji = new JanjiDB();
+        database_alarm = new AlarmDB();
         id = id_String;
         BTN_Delete.setVisible(false);
         L_Alarm.setVisible(false);
@@ -120,6 +125,9 @@ public class P_CardJanji extends javax.swing.JPanel {
 
         LB_Title.setForeground(new java.awt.Color(0, 0, 0));
         LB_Title.setText("jLabel1");
+        LB_Title.setMaximumSize(new java.awt.Dimension(200, 16));
+        LB_Title.setMinimumSize(new java.awt.Dimension(200, 16));
+        LB_Title.setPreferredSize(new java.awt.Dimension(200, 16));
         add(LB_Title);
 
         LB_Date.setForeground(new java.awt.Color(0, 0, 0));
@@ -127,8 +135,13 @@ public class P_CardJanji extends javax.swing.JPanel {
         add(LB_Date);
 
         L_Alarm.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
-        L_Alarm.setForeground(new java.awt.Color(0, 0, 0));
+        L_Alarm.setForeground(new java.awt.Color(255, 51, 51));
         L_Alarm.setText("⏰");
+        L_Alarm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                L_AlarmMouseClicked(evt);
+            }
+        });
         add(L_Alarm);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -141,6 +154,18 @@ public class P_CardJanji extends javax.swing.JPanel {
         database_janji.hapusJanji(id);
         this.setVisible(false);
     }//GEN-LAST:event_BTN_DeleteMouseClicked
+
+    private void L_AlarmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_L_AlarmMouseClicked
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+        if(confirm == 0){
+            database_alarm.hapusAlarm(id);
+            L_Alarm.setVisible(false);
+            JOptionPane.showMessageDialog(this,"Alarm telah dihapus");
+        }
+        
+        
+    }//GEN-LAST:event_L_AlarmMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
