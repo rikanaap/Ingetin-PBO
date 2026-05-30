@@ -134,7 +134,7 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
         jLabel4.setText("Pilih janji");
 
-        CB_Janji.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih janji 1", "Pilih janji 2", "Pilih janji 3", "Pilih janji 4" }));
+        CB_Janji.addActionListener(this::CB_JanjiActionPerformed);
 
         jLabel7.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
         jLabel7.setText("Masukan path musik");
@@ -278,6 +278,10 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TF_MusikActionPerformed
 
+    private void CB_JanjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_JanjiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_JanjiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -301,7 +305,7 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
     } 
     
     private void setUkuranLokasi(){
-        // Ambil ukuran layar user (monitor)
+        //(monitor)
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         this.pack();
         

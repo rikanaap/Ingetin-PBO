@@ -28,6 +28,7 @@ public class welcome extends javax.swing.JFrame {
         updateWaktu();
         Timer timer = new Timer(60000, e -> updateWaktu());
         timer.start();
+        KoneksiDB.MesinAlarm.hidupkan();
     }
 
     /**

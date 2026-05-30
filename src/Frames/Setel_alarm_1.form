@@ -292,16 +292,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="CB_Janji">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Pilih janji 1"/>
-                <StringItem index="1" value="Pilih janji 2"/>
-                <StringItem index="2" value="Pilih janji 3"/>
-                <StringItem index="3" value="Pilih janji 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CB_JanjiActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

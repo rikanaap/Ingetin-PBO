@@ -72,19 +72,37 @@ public int cariIDJanji(String teksJanji) {
         try {
 
             String sql = "DELETE FROM alarm WHERE id_janji=?";
-
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setInt(1, id_janji);
-
             ps.executeUpdate();
-
             System.out.println("Alarm berhasil dihapus");
 
         } catch (Exception e) {
             System.out.println("Hapus Error : " + e.getMessage());
         }
     }
+   
+  public String cekAlarmAktif(String tanggal, int jam, int menit) {
+    String filePathMusik = null;
+    try {
+        String sql = "SELECT a.file_path FROM alarm a " +
+                     "JOIN janji j ON a.id_janji = j.id_janji " +
+                     "WHERE j.date = ? AND j.hour = ? AND j.minute = ?";
+        
+        java.sql.PreparedStatement ps = this.con.prepareStatement(sql);
+        ps.setString(1, tanggal);
+        ps.setInt(2, jam);
+        ps.setInt(3, menit);
+        
+        java.sql.ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            filePathMusik = rs.getString("file_path");
+        }
+    } catch (Exception e) {
+        System.out.println("Error cek alarm otomatis: " + e.getMessage());
+    }
+    return filePathMusik;
+}
 
 }
     
