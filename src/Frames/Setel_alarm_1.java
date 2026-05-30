@@ -269,6 +269,7 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Alarm berhasil disetel dengan musik!");
         //tutup frame
         this.dispose();
+        Frame_Janji.loadCard();
        } catch (Exception e) {
            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
        }

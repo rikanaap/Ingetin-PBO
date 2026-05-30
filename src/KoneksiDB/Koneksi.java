@@ -5,6 +5,7 @@
 package KoneksiDB;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,12 +24,13 @@ public class Koneksi {
             Class.forName(driver).newInstance();
             con=DriverManager.getConnection(url, id, pass);
             if(con==null){
-                System.out.println("Koneksi gagal");
+                JOptionPane.showMessageDialog(null, "Koneksi ke Database bermasalah");
             } else {
                 System.out.println("Koneksi berhasil");
             }
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Koneksi ke Database bermasalah");
+            System.exit(0);
         }
     }
     public static void main(String args[]){

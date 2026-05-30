@@ -38,6 +38,7 @@ public class MesinAlarm {
             
             //Cek database lewat AlarmDB
             String pathMusik = db_alarm.cekAlarmAktif(tglTarget, jamTarget, menitTarget);
+            System.out.println(pathMusik);
             
             //Hasilnya, kalau cocok play musik dan muncul popup
             if (pathMusik != null && !pathMusik.isEmpty()) {
