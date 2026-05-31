@@ -121,4 +121,26 @@ public class MotivasiDB {
             return null;
         }
     }
+    
+    public String ambilMotivasi(int parameter){
+
+        try{
+
+            String sql = "SELECT name FROM motivasi WHERE parameter=? ORDER BY RAND() LIMIT 1";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, parameter);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                return rs.getString("name");
+            }
+
+        }catch(Exception e){
+            System.out.println("Error : " + e.getMessage());
+        }
+        return "Semangat ya!";
+    }
 }

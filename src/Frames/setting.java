@@ -47,9 +47,8 @@ public class setting extends javax.swing.JFrame {
         L_Hour = new javax.swing.JLabel();
         desain_setting = new javax.swing.JPanel();
         IMG_Atur = new javax.swing.JLabel();
-        text_bubble2 = new javax.swing.JLabel();
-        IMG_Bubble = new javax.swing.JLabel();
         text_bubble1 = new javax.swing.JLabel();
+        IMG_Bubble = new javax.swing.JLabel();
         atur_mood = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,29 +119,19 @@ public class setting extends javax.swing.JFrame {
         desain_setting.add(IMG_Atur);
         IMG_Atur.setBounds(120, 60, 159, 87);
 
-        text_bubble2.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
-        text_bubble2.setForeground(new java.awt.Color(51, 0, 88));
-        text_bubble2.setText("dan mood kamu!");
-        text_bubble2.setAlignmentY(0.1F);
-        text_bubble2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        text_bubble2.setMinimumSize(new java.awt.Dimension(270, 21));
-        text_bubble2.setRequestFocusEnabled(false);
-        desain_setting.add(text_bubble2);
-        text_bubble2.setBounds(40, 40, 92, 40);
-
-        IMG_Bubble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Bubble.png"))); // NOI18N
-        desain_setting.add(IMG_Bubble);
-        IMG_Bubble.setBounds(10, 10, 170, 90);
-
         text_bubble1.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
         text_bubble1.setForeground(new java.awt.Color(51, 0, 88));
-        text_bubble1.setText("Yuk atur motivasi");
+        text_bubble1.setText("<html> Yuk atur motivasi dan mood kamu! </html>");
         text_bubble1.setAlignmentY(0.1F);
         text_bubble1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         text_bubble1.setMinimumSize(new java.awt.Dimension(270, 21));
         text_bubble1.setRequestFocusEnabled(false);
         desain_setting.add(text_bubble1);
-        text_bubble1.setBounds(50, 30, 92, 40);
+        text_bubble1.setBounds(50, 30, 100, 40);
+
+        IMG_Bubble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Bubble.png"))); // NOI18N
+        desain_setting.add(IMG_Bubble);
+        IMG_Bubble.setBounds(10, 10, 170, 90);
 
         atur_mood.setFont(new java.awt.Font("Segoe UI Emoji", 1, 15)); // NOI18N
         atur_mood.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Atur Mood.png"))); // NOI18N
@@ -309,6 +298,5 @@ public class setting extends javax.swing.JFrame {
     private javax.swing.JPanel isi_navbar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel text_bubble1;
-    private javax.swing.JLabel text_bubble2;
     // End of variables declaration//GEN-END:variables
 }

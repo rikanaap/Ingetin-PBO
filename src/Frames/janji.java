@@ -7,6 +7,7 @@ package Frames;
 import KoneksiDB.Global;
 import KoneksiDB.JanjiDB;
 import KoneksiDB.MoodDB;
+import KoneksiDB.MotivasiDB;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class janji extends javax.swing.JFrame {
     public LocalTime waktu;
     private JanjiDB database_janji;
     private MoodDB database_mood;
+    private MotivasiDB database_motivasi;
     /**
      * Creates new form janji
      */
@@ -34,6 +36,7 @@ public class janji extends javax.swing.JFrame {
         
         database_janji = new JanjiDB();
         database_mood = new MoodDB();
+        database_motivasi = new MotivasiDB();
         
         setUkuranLokasi();
         loadCard();
@@ -185,7 +188,7 @@ public class janji extends javax.swing.JFrame {
         jLabel4.setMinimumSize(new java.awt.Dimension(270, 21));
         jLabel4.setRequestFocusEnabled(false);
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(180, 20, 110, 40);
+        jLabel4.setBounds(170, 20, 120, 40);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Bubble3.png"))); // NOI18N
         jPanel2.add(jLabel3);
@@ -329,6 +332,7 @@ public class janji extends javax.swing.JFrame {
 
             P_CardFlow.revalidate();
             P_CardFlow.repaint();
+            updateMotivasiBubble();
 
         } catch (Exception e) {
 
@@ -382,6 +386,42 @@ public class janji extends javax.swing.JFrame {
         int y = 0; // 0 berarti mepet ke atas
 
         this.setLocation(x, y);
+    }
+    
+    private void updateMotivasiBubble(){
+        try{
+            ResultSet rs = database_janji.tampilJanji();
+
+            int jumlahJanji = 0;
+            while(rs.next()){
+                jumlahJanji++;
+            }
+
+            if(jumlahJanji == 0){
+                jLabel4.setText(
+                    "<html>Ayo tambah ingatan dan setel alarmnya!!</html>"
+                );
+                return;
+            }
+            
+            int parameter;
+            if(jumlahJanji <= 2){
+                parameter = 1;
+            }else if(jumlahJanji <= 4){
+                parameter = 2;
+            }else{
+                parameter = 3;
+            }
+
+            String motivasi =database_motivasi.ambilMotivasi(parameter);
+
+            jLabel4.setText(
+                "<html>" + motivasi + "</html>"
+            );
+
+        }catch(Exception e){
+            System.out.println("Error : " + e.getMessage());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
