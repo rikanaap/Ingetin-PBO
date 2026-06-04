@@ -26,14 +26,12 @@ public class MotivasiDB {
     public void tambahMotivasi(String name, int parameter) {
 
         try {
-
             String sql = "INSERT INTO motivasi (name, parameter) VALUES (?, ?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, name);
             ps.setInt(2, parameter);
-
             ps.executeUpdate();
 
             System.out.println("Motivasi berhasil ditambahkan");
@@ -47,7 +45,6 @@ public class MotivasiDB {
     public ResultSet tampilMotivasi() {
 
         try {
-
             String sql = "SELECT * FROM motivasi";
 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -55,6 +52,7 @@ public class MotivasiDB {
             ResultSet rs = ps.executeQuery();
 
             return rs;
+            
         } catch (Exception e) {
             System.out.println("Tampil Error : " + e.getMessage());
             return null;
@@ -65,7 +63,6 @@ public class MotivasiDB {
     public void updateMotivasi(int id_motivasi, String name, int parameter) {
 
         try {
-
             String sql = "UPDATE motivasi SET name=?, parameter=? WHERE id_motivasi=?";
 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -73,7 +70,6 @@ public class MotivasiDB {
             ps.setString(1, name);
             ps.setInt(2, parameter);
             ps.setInt(3, id_motivasi);
-
             ps.executeUpdate();
 
             System.out.println("Motivasi berhasil diupdate");
@@ -87,13 +83,11 @@ public class MotivasiDB {
     public void hapusMotivasi(int id_motivasi) {
 
         try {
-
             String sql = "DELETE FROM motivasi WHERE id_motivasi=?";
 
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setInt(1, id_motivasi);
-
             ps.executeUpdate();
 
             System.out.println("Motivasi berhasil dihapus");
@@ -104,10 +98,25 @@ public class MotivasiDB {
     }
 
     // SEARCH
+    public ResultSet cariMotivasi(int id_motivasi){
+
+        try{
+            String sql = "SELECT * FROM motivasi WHERE id_motivasi=?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id_motivasi);
+
+            return ps.executeQuery();
+
+        }catch(Exception e){
+            System.out.println("Cari Error : " + e.getMessage());
+            return null;
+        }
+    }
+    
     public ResultSet cariMotivasi(String keyword) {
 
         try {
-
             String sql = "SELECT * FROM motivasi WHERE name LIKE ?";
 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -125,7 +134,6 @@ public class MotivasiDB {
     public String ambilMotivasi(int parameter){
 
         try{
-
             String sql = "SELECT name FROM motivasi WHERE parameter=? ORDER BY RAND() LIMIT 1";
 
             PreparedStatement ps = con.prepareStatement(sql);

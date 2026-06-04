@@ -71,6 +71,7 @@ public class table_motivasi extends javax.swing.JFrame {
         tampil_motivasi = new javax.swing.JButton();
         inputID = new javax.swing.JTextField();
         SubTitle = new javax.swing.JLabel();
+        button_parameter = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -177,33 +178,43 @@ public class table_motivasi extends javax.swing.JFrame {
         SubTitle.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
         SubTitle.setText("Cari kata-kata motivasi");
 
+        button_parameter.setBackground(new java.awt.Color(234, 227, 227));
+        button_parameter.setFont(new java.awt.Font("Corbel", 1, 10)); // NOI18N
+        button_parameter.setText("Apa itu Parameter?");
+        button_parameter.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        button_parameter.addActionListener(this::button_parameterActionPerformed);
+
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
         Background.setLayout(BackgroundLayout);
         BackgroundLayout.setHorizontalGroup(
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Navbar, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Title)
+                .addGap(145, 145, 145))
             .addGroup(BackgroundLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addContainerGap(136, Short.MAX_VALUE)
-                        .addComponent(Title))
-                    .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
                         .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SubTitle)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(BackgroundLayout.createSequentialGroup()
+                                .addComponent(SubTitle)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(inputID))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cari_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                                .addComponent(inputID)))
+                                .addComponent(tambah_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(update_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(hapus_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tampil_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addComponent(button_parameter, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cari_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tambah_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(update_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(hapus_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tampil_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         BackgroundLayout.setVerticalGroup(
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,14 +222,15 @@ public class table_motivasi extends javax.swing.JFrame {
                 .addComponent(Navbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addComponent(SubTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inputID, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(cari_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(inputID)
+                    .addComponent(cari_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(BackgroundLayout.createSequentialGroup()
                         .addComponent(tampil_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -226,9 +238,11 @@ public class table_motivasi extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(update_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(hapus_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+                        .addComponent(hapus_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(button_parameter, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -239,7 +253,7 @@ public class table_motivasi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
         );
 
         pack();
@@ -255,6 +269,13 @@ public class table_motivasi extends javax.swing.JFrame {
 
     private void cari_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_motivasiActionPerformed
         // TODO add your handling code here:
+        String keyword = inputID.getText();
+        
+        if(keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Isi kata motivasi yang ingin dicari");
+            return;
+        }
+        
         cariMotivasi();
     }//GEN-LAST:event_cari_motivasiActionPerformed
 
@@ -269,7 +290,7 @@ public class table_motivasi extends javax.swing.JFrame {
 
         if (selectedRow != -1) {
             int selectedId = Integer.parseInt(tableMotivasi.getValueAt(selectedRow, 1).toString());
-            motivasi_form FMotivasiForm = new motivasi_form(selectedId); //0 tu ngasih tau kalau create, simpelnya begitu
+            motivasi_form FMotivasiForm = new motivasi_form(selectedId);
             FMotivasiForm.setVisible(true);
             this.dispose();
         } else {
@@ -282,7 +303,6 @@ public class table_motivasi extends javax.swing.JFrame {
 
         if(row == -1){
             JOptionPane.showMessageDialog(this, "Pilih data yang mau di hapus");
-
             return;
         }
 
@@ -305,6 +325,19 @@ public class table_motivasi extends javax.swing.JFrame {
     private void inputIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputIDActionPerformed
+
+    private void button_parameterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_parameterActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Apa itu Parameter?\n\n"
+        + "Parameter digunakan untuk menentukan kapan sebuah motivasi ditampilkan pada tanggal yang terdapat janji/tugas yang harus diselesaikan.\n\n"
+        + "Contoh:\n"
+        + "Parameter 1 -> muncul saat ada 1-2 tugas\n"
+        + "Parameter 2 -> muncul saat ada 3-4 tugas\n"
+        + "Parameter 3 -> muncul saat ada 5-lebih tugas\n"
+        + "Jika jumlah tugas sesuai, sistem akan memilih salah satu motivasi secara acak.",
+                "Penjelasan Parameter",
+                JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_button_parameterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -337,7 +370,6 @@ public class table_motivasi extends javax.swing.JFrame {
         DefaultTableModel data = new DefaultTableModel(null, header);
         
         tableMotivasi.setModel(data);
-        
         tableMotivasi.getColumnModel().getColumn(1).setMinWidth(0);
         tableMotivasi.getColumnModel().getColumn(1).setMaxWidth(0);
         tableMotivasi.getColumnModel().getColumn(1).setWidth(0);
@@ -351,14 +383,14 @@ public class table_motivasi extends javax.swing.JFrame {
                 data.addRow(row);
                 nomor++;
             }
-            
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         };
     }
     
     private void cariMotivasi(){
-
+        String keyword = inputID.getText();
+        
         Object header[] = {"No", "ID", "Name", "Parameter"};
 
         DefaultTableModel data = new DefaultTableModel(null, header);
@@ -369,32 +401,24 @@ public class table_motivasi extends javax.swing.JFrame {
         tableMotivasi.getColumnModel().getColumn(1).setWidth(0);
 
         try {
-
-            String keyword = inputID.getText();
-
             ResultSet rs = database_motivasi.cariMotivasi(keyword);
 
             int nomor = 1;
+            boolean ditemukan = false;
+            
             while(rs.next()){
-
-                String row[] = {
-
-                    String.valueOf(nomor),
-                    rs.getString("id_motivasi"),
-                    rs.getString("name"),
-                    rs.getString("parameter")
-
-                };
-
+                ditemukan = true;
+                String row[] = {String.valueOf(nomor), rs.getString("id_motivasi"), rs.getString("name"), rs.getString("parameter")};
                 data.addRow(row);
                 nomor++;
-
             }
-
+            
+            if(!ditemukan) {
+                data.addRow(new Object[] {"", "", "Data tidak ditemukan", ""});
+                return;
+            }
         } catch(Exception e){
-
             JOptionPane.showMessageDialog(this, e.getMessage());
-
         }
 
     }
@@ -436,6 +460,7 @@ public class table_motivasi extends javax.swing.JFrame {
     private javax.swing.JPanel Navbar;
     private javax.swing.JLabel SubTitle;
     private javax.swing.JLabel Title;
+    private javax.swing.JButton button_parameter;
     private javax.swing.JButton cari_motivasi;
     private javax.swing.JButton hapus_motivasi;
     private javax.swing.JTextField inputID;

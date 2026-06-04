@@ -5,6 +5,7 @@
 package Frames;
 
 import KoneksiDB.MotivasiDB;
+import javax.swing.JOptionPane;
 import java.awt.HeadlessException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -229,8 +230,15 @@ public class motivasi_form extends javax.swing.JFrame {
     private void simpan_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpan_motivasiActionPerformed
         try {
             String nama = name_input.getText();
-            int parameter = Integer.parseInt(parameter_input.getText());
+            String parameterText = parameter_input.getText();
         
+            if(nama.isEmpty() || parameterText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Kolom tidak boleh kosong");
+                return;
+            }
+            
+            int parameter = Integer.parseInt(parameterText);
+            
             if(id == 0){
                 database_motivasi.tambahMotivasi(nama, parameter);
             }else{
@@ -241,7 +249,7 @@ public class motivasi_form extends javax.swing.JFrame {
             FTableMotivasi.setVisible(true);
             this.dispose();
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Parameter harus berupa angka");
         }
     }//GEN-LAST:event_simpan_motivasiActionPerformed
 
