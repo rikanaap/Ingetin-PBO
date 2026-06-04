@@ -66,6 +66,7 @@ public class Kalender extends javax.swing.JFrame {
         BTN_Setting = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Kalender");
         setMinimumSize(new java.awt.Dimension(400, 330));
         setSize(new java.awt.Dimension(400, 330));
 
@@ -86,7 +87,6 @@ public class Kalender extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 13, 0));
 
         jLabel5.setFont(new java.awt.Font("Garamond", 1, 15)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/BTN_Back.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,7 +97,6 @@ public class Kalender extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("INGETIN");
         jLabel6.setToolTipText("");
@@ -111,7 +110,6 @@ public class Kalender extends javax.swing.JFrame {
 
         L_Hour.setBackground(new java.awt.Color(0, 0, 0));
         L_Hour.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
-        L_Hour.setForeground(new java.awt.Color(0, 0, 0));
         L_Hour.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         L_Hour.setText("21 Mei, 09:00");
         L_Hour.setPreferredSize(new java.awt.Dimension(260, 20));
@@ -120,15 +118,12 @@ public class Kalender extends javax.swing.JFrame {
         Navbar.add(jPanel1);
 
         jLabel1.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Mau diingetin tanggal berapa?");
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel2.setOpaque(false);
 
         L_Month.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        L_Month.setForeground(new java.awt.Color(0, 0, 0));
         L_Month.setText("Bulan");
 
         P_KalenderFlow.setMaximumSize(new java.awt.Dimension(200, 32767));
@@ -136,7 +131,6 @@ public class Kalender extends javax.swing.JFrame {
         P_KalenderFlow.setPreferredSize(new java.awt.Dimension(200, 152));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("M");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -144,7 +138,6 @@ public class Kalender extends javax.swing.JFrame {
         P_KalenderFlow.add(jLabel4);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("S");
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -152,7 +145,6 @@ public class Kalender extends javax.swing.JFrame {
         P_KalenderFlow.add(jLabel7);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("S");
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -160,7 +152,6 @@ public class Kalender extends javax.swing.JFrame {
         P_KalenderFlow.add(jLabel8);
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("R");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -168,7 +159,6 @@ public class Kalender extends javax.swing.JFrame {
         P_KalenderFlow.add(jLabel10);
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("K");
         jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -176,7 +166,6 @@ public class Kalender extends javax.swing.JFrame {
         P_KalenderFlow.add(jLabel11);
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("J");
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -184,7 +173,6 @@ public class Kalender extends javax.swing.JFrame {
         P_KalenderFlow.add(jLabel12);
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("S");
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -245,7 +233,8 @@ public class Kalender extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(9, 9, 9)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BTN_Setting, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BTN_Setting, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

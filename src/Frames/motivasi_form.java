@@ -68,6 +68,7 @@ public class motivasi_form extends javax.swing.JFrame {
         parameter_input = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Form Motivasi");
 
         Background.setBackground(new java.awt.Color(234, 227, 227));
         Background.setMaximumSize(new java.awt.Dimension(400, 330));
@@ -199,7 +200,8 @@ public class motivasi_form extends javax.swing.JFrame {
                         .addComponent(parameter_input, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(simpan_motivasi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))))
+                        .addGap(63, 63, 63)))
+                .addContainerGap(1, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

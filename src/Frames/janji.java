@@ -74,7 +74,7 @@ public class janji extends javax.swing.JFrame {
         BTN_SetelAlarm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ingetin - Janji");
+        setTitle("Form Ingetin Janji");
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(234, 227, 227));

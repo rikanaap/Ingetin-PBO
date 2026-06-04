@@ -69,6 +69,7 @@ public class table_motivasi extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Table Motivasi");
 
         Background.setBackground(new java.awt.Color(234, 227, 227));
         Background.setName("kumpulan mood"); // NOI18N
@@ -175,7 +176,7 @@ public class table_motivasi extends javax.swing.JFrame {
             .addGroup(BackgroundLayout.createSequentialGroup()
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addContainerGap(138, Short.MAX_VALUE)
+                        .addContainerGap(135, Short.MAX_VALUE)
                         .addComponent(Title))
                     .addGroup(BackgroundLayout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -205,8 +206,8 @@ public class table_motivasi extends javax.swing.JFrame {
                 .addComponent(SubTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inputID)
-                    .addComponent(cari_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                    .addComponent(inputID, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(cari_motivasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(BackgroundLayout.createSequentialGroup()
