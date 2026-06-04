@@ -104,15 +104,15 @@ public class MotivasiDB {
     }
 
     // SEARCH
-    public ResultSet cariMotivasi(int id_motivasi) {
+    public ResultSet cariMotivasi(String keyword) {
 
         try {
 
-            String sql = "SELECT * FROM motivasi WHERE id_motivasi=?";
+            String sql = "SELECT * FROM motivasi WHERE name LIKE ?";
 
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, id_motivasi);
+            ps.setString(1, keyword + "%");
 
             return ps.executeQuery();
             

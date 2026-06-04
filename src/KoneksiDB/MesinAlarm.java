@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class MesinAlarm {
     private static Timer timer;
     private static final AlarmDB db_alarm = new AlarmDB();
-    private static final DateTimeFormatter fmtDB = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter fmtDB = DateTimeFormatter.ofPattern("yyyy-mm-dd");
 
     public static void hidupkan() {
         //Mencegah mesin membuat timer ganda agar suara tidak tumpang tindih
@@ -46,14 +46,15 @@ public class MesinAlarm {
                 
                 //ogika Pemutar Audio otomatis (.wav) di background
                 try {
-                    File fileSuara = new File(pathMusik);
-                    if (fileSuara.exists()) {
-                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(fileSuara);
+                    // Mengambil file musik dari resource ClassPath internal proyek
+                    java.net.URL urlSuara = MesinAlarm.class.getResource(pathMusik);
+                    if (urlSuara != null) {
+                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(urlSuara);
                         Clip clip = AudioSystem.getClip();
                         clip.open(audioStream);
                         clip.start();
                     } else {
-                        System.out.println("File musik tidak ditemukan di path: " + pathMusik);
+                        System.out.println("File musik tidak ditemukan di folder Resource: " + pathMusik);
                     }
                 } catch (Exception ex) {
                     System.out.println("Gagal memutar musik: " + ex.getMessage());

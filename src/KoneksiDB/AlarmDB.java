@@ -23,7 +23,7 @@ public AlarmDB() {
 
 public java.sql.ResultSet ambilSemuaJanji() {
     java.sql.ResultSet rs = null;
-    try {
+    try {  
         String sql = "SELECT appointment FROM janji WHERE date='"+ Global.tanggal +"'"; 
         java.sql.Statement stmt = con.createStatement(); 
         rs = stmt.executeQuery(sql);

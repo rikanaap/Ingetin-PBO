@@ -60,7 +60,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace pref="135" max="32767" attributes="0"/>
+                          <EmptySpace pref="136" max="32767" attributes="0"/>
                           <Component id="Title" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -429,13 +429,16 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="inputID">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputIDActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="SubTitle">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Corbel" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Cari motivasi kamu berdasarkan ID"/>
+            <Property name="text" type="java.lang.String" value="Cari kata-kata motivasi"/>
           </Properties>
         </Component>
       </SubComponents>

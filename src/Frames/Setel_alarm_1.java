@@ -19,43 +19,48 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
     private janji Frame_Janji;
     private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MMMM, HH:mm");
     public LocalTime waktu;
-
+    
+    /*Membuka halaman ini di java*/
     public Setel_alarm_1() {
-    initComponents();
+        initComponents();
  
-    database_alarm = new KoneksiDB.AlarmDB(); 
-    setJanji(); 
-    setUkuranLokasi();
-    updateWaktu();
-    Timer timer = new Timer(60000, e -> updateWaktu());
-    timer.start();
+        database_alarm = new KoneksiDB.AlarmDB(); 
+        setJanji(); 
+        setUkuranLokasi();
+        updateWaktu();
+        Timer timer = new Timer(60000, e -> updateWaktu());
+        timer.start();
     }
     
     private void setJanji() {
-    CB_Janji.removeAllItems();
-    
-    try {
-        //Ambil data dari database 
-        java.sql.ResultSet rs = database_alarm.ambilSemuaJanji();
-        //Masukkan data satu perdatu ke ComboBox
-        while (rs != null && rs.next()) {
-            String namaJanji = rs.getString("appointment"); 
-            CB_Janji.addItem(namaJanji);
+        CB_Janji.removeAllItems();
+        
+        try {
+            //Ambil data dari database 
+            java.sql.ResultSet rs = database_alarm.ambilSemuaJanji();
+            //Masukkan data satu perdatu ke ComboBox
+            while (rs != null && rs.next()) {
+                String namaJanji = rs.getString("appointment"); 
+                CB_Janji.addItem(namaJanji);
+            }
+        } catch (Exception e) {
+            System.out.println("Error saat mengisi JComboBox: " + e.getMessage());
         }
-    } catch (Exception e) {
-        System.out.println("Error saat mengisi JComboBox: " + e.getMessage());
-    }
     }
     
     private int ambilIDJanji() {
-    //Ambil janji yangdipilih user di ComboBox
-    String janjiDipilih = CB_Janji.getSelectedItem().toString();
-    //Oper ke fungsi yang di AlarmDB
-    return database_alarm.cariIDJanji(janjiDipilih);
-}
+        // Validasi jika item kosong agar tidak error null pointer
+        if (CB_Janji.getSelectedItem() == null) {
+            return 0;
+        }
+        //Ambil janji yangdipilih user di ComboBox
+        String janjiDipilih = CB_Janji.getSelectedItem().toString();
+        //Oper ke fungsi yang di AlarmDB
+        return database_alarm.cariIDJanji(janjiDipilih);
+    }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -68,7 +73,6 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         CB_Janji = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        TF_Musik = new javax.swing.JTextField();
         BTN_SetelAlarm = new javax.swing.JButton();
         BTN_Batal = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -77,6 +81,7 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        CB_Musik = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Setel Alarm");
@@ -118,7 +123,6 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel6);
 
-        L_Hour.setBackground(new java.awt.Color(0, 0, 0));
         L_Hour.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
         L_Hour.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         L_Hour.setText("21 Mei, 09:00");
@@ -127,7 +131,6 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
 
         Navbar.add(jPanel2);
 
-        L_Tanggal.setBackground(new java.awt.Color(0, 0, 0));
         L_Tanggal.setFont(new java.awt.Font("Corbel", 1, 17)); // NOI18N
         L_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         L_Tanggal.setText("27 Mei 2026");
@@ -138,9 +141,7 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         CB_Janji.addActionListener(this::CB_JanjiActionPerformed);
 
         jLabel7.setFont(new java.awt.Font("Corbel", 1, 15)); // NOI18N
-        jLabel7.setText("Masukan path musik");
-
-        TF_Musik.addActionListener(this::TF_MusikActionPerformed);
+        jLabel7.setText("Pilih musik alarm");
 
         BTN_SetelAlarm.setText("Setel alarm");
         BTN_SetelAlarm.addActionListener(this::BTN_SetelAlarmActionPerformed);
@@ -155,10 +156,7 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Corbel", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 0, 88));
         jLabel9.setText("<html>HAHH?? PENTING \nBANGET YA INI?</html>");
-        jLabel9.setAlignmentY(0.1F);
         jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel9.setMinimumSize(new java.awt.Dimension(270, 21));
-        jLabel9.setRequestFocusEnabled(false);
         jPanel3.add(jLabel9);
         jLabel9.setBounds(120, 20, 110, 40);
 
@@ -169,6 +167,10 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frames/images/IMG_Form Alarm.png"))); // NOI18N
         jPanel3.add(jLabel11);
         jLabel11.setBounds(20, 50, 90, 80);
+
+        // DAFTAR MUSIK WAV YANG ADA DI FOLDER RESOURCE-MU
+        CB_Musik.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "alarm1.wav", "alarm2.wav", "alarm3.wav" }));
+        CB_Musik.addActionListener(this::CB_MusikActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -202,8 +204,8 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TF_Musik)
-                .addGap(26, 26, 26))
+                .addComponent(CB_Musik, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,9 +223,9 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
                 .addComponent(CB_Janji, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TF_Musik, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CB_Musik, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(BTN_SetelAlarm, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,50 +247,81 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {                                     
         back();
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }                                    
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {                                     
         back();
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }                                    
 
-    private void BTN_BatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BatalActionPerformed
+    private void BTN_BatalActionPerformed(java.awt.event.ActionEvent evt) {                                          
         this.dispose();
-        Frame_Janji.loadCard();
-    }//GEN-LAST:event_BTN_BatalActionPerformed
+        if (Frame_Janji != null) {
+            Frame_Janji.loadCard();
+        }
+    }                                         
 
-    private void BTN_SetelAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SetelAlarmActionPerformed
+    private void BTN_SetelAlarmActionPerformed(java.awt.event.ActionEvent evt) {                                               
        try {
-        //Ambil path musik
-        String pathMusik = TF_Musik.getText(); 
-        int idJanji = ambilIDJanji();
-        //Validasi kalo lum pilih janji
-        if (idJanji == 0) {
-            JOptionPane.showMessageDialog(this, "Pilih janji dulu", "Peringatan", JOptionPane.WARNING_MESSAGE);
-            return;
-        }      
-        //Masukkan ke database
-        String catatan = "Alarm untuk janji ID " + idJanji;
-        database_alarm.tambahAlarm(pathMusik, idJanji, catatan);
-        JOptionPane.showMessageDialog(this, "Alarm berhasil disetel dengan musik!");
-        //tutup frame
-        this.dispose();
-        Frame_Janji.loadCard();
+            // FIX BUG UTAMA: Mengambil pilihan string dari JComboBox dengan benar, bukan .getText()
+            if (CB_Musik.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Silakan pilih musik terlebih dahulu!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            String musikTerpilih = CB_Musik.getSelectedItem().toString(); 
+            // Kita bungkus nama file mentah menjadi full path package resource
+            String pathMusik = "/Musik/" + musikTerpilih; 
+            
+            int idJanji = ambilIDJanji();
+            //Validasi kalo lum pilih janji
+            if (idJanji == 0) {
+                JOptionPane.showMessageDialog(this, "Pilih janji dulu", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                return;
+            }      
+            //Masukkan ke database
+            String catatan = "Alarm untuk janji ID " + idJanji;
+            database_alarm.tambahAlarm(pathMusik, idJanji, catatan);
+            JOptionPane.showMessageDialog(this, "Alarm berhasil disetel dengan musik!");
+            
+            //tutup frame
+            this.dispose();
+            if (Frame_Janji != null) {
+                Frame_Janji.loadCard();
+            }
        } catch (Exception e) {
-           JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
        }
-    }//GEN-LAST:event_BTN_SetelAlarmActionPerformed
+    }                                              
 
-    private void TF_MusikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_MusikActionPerformed
+    private void CB_JanjiActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_TF_MusikActionPerformed
+    }                                        
 
-    private void CB_JanjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_JanjiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CB_JanjiActionPerformed
+    private void CB_MusikActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // BONUS FITUR: Putar musik otomatis sebagai preview saat user memilih opsi di ComboBox
+        try {
+            if (CB_Musik.getSelectedItem() == null) return;
+            
+            String musikTerpilih = CB_Musik.getSelectedItem().toString();
+            String pathMusik = "/Musik/" + musikTerpilih; // Sesuaikan dengan nama package musikmu (M kapital/kecil)
+            java.net.URL url = getClass().getResource(pathMusik);
+            
+            if (url != null) {
+                javax.sound.sampled.AudioInputStream audioStream = javax.sound.sampled.AudioSystem.getAudioInputStream(url);
+                javax.sound.sampled.Clip clip = javax.sound.sampled.AudioSystem.getClip();
+                clip.open(audioStream);
+                clip.start(); // Test putar musik audio
+            } else {
+                System.out.println("File musik '" + musikTerpilih + "' tidak ditemukan di folder /Musik/");
+            }
+        } catch (Exception e) {
+            System.out.println("Gagal memutar preview musik: " + e.getMessage());
+        }
+    }                                        
 
     /**
      * @param args the command line arguments
@@ -313,15 +346,10 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
     } 
     
     private void setUkuranLokasi(){
-        //(monitor)
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         this.pack();
         
         int frameWidth = this.getSize().width;
-        System.out.println(frameWidth);
-        System.out.println(this.getSize().height);
-
-        // Hitung posisi X agar mepet ke kanan
         int x = screenSize.width - frameWidth;
         int y = 0; // 0 berarti mepet ke atas
 
@@ -332,7 +360,7 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         Frame_Janji = FJanji;
     }
     
-     private void back(){
+    private void back(){
         janji FJanji = new janji();
         FJanji.setVisible(true);
         this.dispose();
@@ -341,19 +369,22 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
     private void updateWaktu(){
          LocalDateTime sekarang = LocalDateTime.now();
          L_Hour.setText(sekarang.format(fmt));
+         
+         // SINKRONISASI TANGGAL UTK TAHUN 2026: Mengubah teks L_Tanggal secara dinamis otomatis mengikuti hari ini
+         DateTimeFormatter fmtTanggalLayar = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+         L_Tanggal.setText(sekarang.format(fmtTanggalLayar));
+         
          waktu = LocalTime.now();
     }
 
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton BTN_Batal;
     private javax.swing.JButton BTN_SetelAlarm;
     private javax.swing.JComboBox<String> CB_Janji;
+    private javax.swing.JComboBox<String> CB_Musik;
     private javax.swing.JLabel L_Hour;
     private javax.swing.JLabel L_Tanggal;
     private javax.swing.JPanel Navbar;
-    private javax.swing.JTextField TF_Musik;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -366,5 +397,5 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

@@ -6,6 +6,7 @@ package Frames;
 
 import KoneksiDB.MoodDB;
 import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import java.sql.ResultSet;
@@ -231,14 +232,32 @@ public class mood_form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void simpan_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpan_moodActionPerformed
-        if(id == 0){
-            database_mood.tambahMood(jComboBox1.getSelectedItem().toString().toLowerCase(), moodinput.getText());
-        }else{
-            database_mood.updateMood(id, jComboBox1.getSelectedItem().toString().toLowerCase(), moodinput.getText());
+        String title = moodinput.getText().trim();
+
+        if (title.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Mood harus diisi!",
+                    "Peringatan",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
         }
-        table_mood FTableMood = new table_mood();
-        FTableMood.setVisible(true);
-        this.dispose();
+
+        if (id == 0) {
+            database_mood.tambahMood(
+                    jComboBox1.getSelectedItem().toString().toLowerCase(),
+                    title
+            );
+        } else {
+            database_mood.updateMood(
+                    id,
+                    jComboBox1.getSelectedItem().toString().toLowerCase(),
+                    title
+            );
+    }
+
+    table_mood FTableMood = new table_mood();
+    FTableMood.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_simpan_moodActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

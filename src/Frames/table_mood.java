@@ -296,7 +296,7 @@ public class table_mood extends javax.swing.JFrame {
 
     private void cari_moodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_moodActionPerformed
         // TODO add your handling code here:
-        Object header[] = {"ID", "Icon", "Title"};
+        Object header[] = {"Nomor", "Icon", "Title"};
 
         DefaultTableModel data = new DefaultTableModel(null, header);
 
@@ -305,23 +305,31 @@ public class table_mood extends javax.swing.JFrame {
         try {
 
             String keyword = inputTitle.getText();
+            if (keyword.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Masukkan ID atau title yang ingin dicari");
+            }else{
+                ResultSet rs = database_mood.cariMood(keyword);
+                if (rs.next()) {
+                    while (rs.next()) {
 
-            ResultSet rs = database_mood.cariMood(keyword);
+                    String row[] = {
+                        rs.getString("id_mood"),
+                        rs.getString("icon"),
+                        rs.getString("title")
+                    };
 
-            while (rs.next()) {
+                    data.addRow(row);
+                    }
+                }else{
+                    String row[] = {("tidak ada data")};
 
-                String row[] = {
-                    rs.getString("id_mood"),
-                    rs.getString("icon"),
-                    rs.getString("title")
-                };
-
-                data.addRow(row);
+                    data.addRow(row);
+                }
             }
-
+            
         } catch (Exception e) {
 
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
 
         }
     }//GEN-LAST:event_cari_moodActionPerformed
@@ -365,7 +373,7 @@ public class table_mood extends javax.swing.JFrame {
     }
     
      public void tampilSemuaData(){
-        Object header[] ={"ID","Icon","Title"};
+        Object header[] ={"Nomor","Icon","Title"};
         
         DefaultTableModel data = new DefaultTableModel(null, header);
         
@@ -380,7 +388,7 @@ public class table_mood extends javax.swing.JFrame {
             }
             
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         };
     }
      

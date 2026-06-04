@@ -36,6 +36,13 @@ public class table_motivasi extends javax.swing.JFrame {
         updateWaktu();
         Timer timer = new Timer(60000, e -> updateWaktu());
         timer.start();
+        
+        inputID.addKeyListener(new java.awt.event.KeyAdapter() {
+            
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cariMotivasi();
+            }
+        });
     }
 
     /**
@@ -165,8 +172,10 @@ public class table_motivasi extends javax.swing.JFrame {
         tampil_motivasi.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         tampil_motivasi.addActionListener(this::tampil_motivasiActionPerformed);
 
+        inputID.addActionListener(this::inputIDActionPerformed);
+
         SubTitle.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        SubTitle.setText("Cari motivasi kamu berdasarkan ID");
+        SubTitle.setText("Cari kata-kata motivasi");
 
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
         Background.setLayout(BackgroundLayout);
@@ -176,7 +185,7 @@ public class table_motivasi extends javax.swing.JFrame {
             .addGroup(BackgroundLayout.createSequentialGroup()
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addContainerGap(135, Short.MAX_VALUE)
+                        .addContainerGap(136, Short.MAX_VALUE)
                         .addComponent(Title))
                     .addGroup(BackgroundLayout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -246,34 +255,7 @@ public class table_motivasi extends javax.swing.JFrame {
 
     private void cari_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_motivasiActionPerformed
         // TODO add your handling code here:
-        Object header[] = {"ID", "Name", "Parameter"};
-
-        DefaultTableModel data = new DefaultTableModel(null, header);
-
-        tableMotivasi.setModel(data);
-
-        try {
-
-            int id = Integer.parseInt(inputID.getText());
-
-            ResultSet rs = database_motivasi.cariMotivasi(id);
-
-            while (rs.next()) {
-
-                String row[] = {
-                    rs.getString("id_motivasi"),
-                    rs.getString("name"),
-                    rs.getString("parameter")
-                };
-
-                data.addRow(row);
-            }
-
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, e.getMessage());
-
-        }
+        cariMotivasi();
     }//GEN-LAST:event_cari_motivasiActionPerformed
 
     private void tambah_motivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambah_motivasiActionPerformed
@@ -286,7 +268,7 @@ public class table_motivasi extends javax.swing.JFrame {
         int selectedRow = tableMotivasi.getSelectedRow();
 
         if (selectedRow != -1) {
-            int selectedId = Integer.parseInt(tableMotivasi.getValueAt(selectedRow, 0).toString());
+            int selectedId = Integer.parseInt(tableMotivasi.getValueAt(selectedRow, 1).toString());
             motivasi_form FMotivasiForm = new motivasi_form(selectedId); //0 tu ngasih tau kalau create, simpelnya begitu
             FMotivasiForm.setVisible(true);
             this.dispose();
@@ -304,7 +286,7 @@ public class table_motivasi extends javax.swing.JFrame {
             return;
         }
 
-        int id = Integer.parseInt(tableMotivasi.getValueAt(row, 0).toString());
+        int id = Integer.parseInt(tableMotivasi.getValueAt(row, 1).toString());
 
         int confirm = JOptionPane.showConfirmDialog(this, "Yakin hapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
 
@@ -319,6 +301,10 @@ public class table_motivasi extends javax.swing.JFrame {
         // TODO add your handling code here:
         tampilSemuaData();
     }//GEN-LAST:event_tampil_motivasiActionPerformed
+
+    private void inputIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,23 +332,71 @@ public class table_motivasi extends javax.swing.JFrame {
     }
     
     public void tampilSemuaData(){
-        Object header[] ={"ID","Name","Parameter"};
+        Object header[] ={"No", "ID", "Name", "Parameter"};
         
         DefaultTableModel data = new DefaultTableModel(null, header);
         
         tableMotivasi.setModel(data);
         
+        tableMotivasi.getColumnModel().getColumn(1).setMinWidth(0);
+        tableMotivasi.getColumnModel().getColumn(1).setMaxWidth(0);
+        tableMotivasi.getColumnModel().getColumn(1).setWidth(0);
+        
         try{
             ResultSet rs =  database_motivasi.tampilMotivasi();
             
+            int nomor = 1;
             while(rs.next()){
-                String row[] = {rs.getString("id_motivasi"), rs.getString("name"), rs.getString("parameter")};
+                String row[] = {String.valueOf(nomor), rs.getString("id_motivasi"), rs.getString("name"), rs.getString("parameter")};
                 data.addRow(row);
+                nomor++;
             }
             
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         };
+    }
+    
+    private void cariMotivasi(){
+
+        Object header[] = {"No", "ID", "Name", "Parameter"};
+
+        DefaultTableModel data = new DefaultTableModel(null, header);
+
+        tableMotivasi.setModel(data);
+        tableMotivasi.getColumnModel().getColumn(1).setMinWidth(0);
+        tableMotivasi.getColumnModel().getColumn(1).setMaxWidth(0);
+        tableMotivasi.getColumnModel().getColumn(1).setWidth(0);
+
+        try {
+
+            String keyword = inputID.getText();
+
+            ResultSet rs = database_motivasi.cariMotivasi(keyword);
+
+            int nomor = 1;
+            while(rs.next()){
+
+                String row[] = {
+
+                    String.valueOf(nomor),
+                    rs.getString("id_motivasi"),
+                    rs.getString("name"),
+                    rs.getString("parameter")
+
+                };
+
+                data.addRow(row);
+                nomor++;
+
+            }
+
+        } catch(Exception e){
+
+            JOptionPane.showMessageDialog(this, e.getMessage());
+
+        }
+
     }
      
     private void back(){
