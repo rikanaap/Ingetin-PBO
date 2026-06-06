@@ -4,8 +4,10 @@
  */
 package Frames;
 
+import KoneksiDB.AlarmDB;
 import KoneksiDB.Global;
 import KoneksiDB.JanjiDB;
+import KoneksiDB.MesinAlarm;
 import KoneksiDB.MoodDB;
 import KoneksiDB.MotivasiDB;
 import java.sql.ResultSet;
@@ -14,6 +16,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -28,20 +35,30 @@ public class janji extends javax.swing.JFrame {
     private JanjiDB database_janji;
     private MoodDB database_mood;
     private MotivasiDB database_motivasi;
+    private AlarmDB database_alarm;
     /**
      * Creates new form janji
      */
     public janji() {
         initComponents();
+          setIconImage(
+            new ImageIcon(
+                getClass().getResource("/Frames/images/IMG_Logo.png")
+            ).getImage()
+        );
         
         database_janji = new JanjiDB();
         database_mood = new MoodDB();
         database_motivasi = new MotivasiDB();
+        database_alarm = new AlarmDB();
         
         setUkuranLokasi();
         loadCard();
         updateWaktu();
-        Timer timer = new Timer(60000, e -> updateWaktu());
+        Timer timer = new Timer(60000, e ->{
+            updateWaktu(); 
+            runAlarm();
+        });
         timer.start();
         this.pack();
     }
@@ -338,6 +355,41 @@ public class janji extends javax.swing.JFrame {
 
             System.out.println(e);
         }
+    }
+    
+    private void runAlarm(){
+        LocalDateTime waktuMaju = LocalDateTime.now();
+        int jamTarget = waktuMaju.getHour();
+        int menitTarget = waktuMaju.getMinute();
+        
+        System.out.println(jamTarget + "  " + menitTarget);
+        
+        String pathMusik = database_alarm.cekAlarmAktif(jamTarget, menitTarget);
+        if (pathMusik != null && !pathMusik.isEmpty()) {
+                System.out.println("ALARM MATCH! Memutar: " + pathMusik);
+                
+                //ogika Pemutar Audio otomatis (.wav) di background
+                try {
+                    // Mengambil file musik dari resource ClassPath internal proyek
+                    java.net.URL urlSuara = MesinAlarm.class.getResource(pathMusik);
+                    if (urlSuara != null) {
+                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(urlSuara);
+                        Clip clip = AudioSystem.getClip();
+                        clip.open(audioStream);
+                        clip.start();
+                    } else {
+                        System.out.println("File musik tidak ditemukan di folder Resource: " + pathMusik);
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Gagal memutar musik: " + ex.getMessage());
+                }
+                this.setAlwaysOnTop(true);
+                JOptionPane.showMessageDialog(this, 
+                    "PENGINGAT OTOMATIS INGETIN!\n\nKamu punya janjii, ayo siap-siap udah jam"+ jamTarget +":"+ menitTarget +"!", 
+                    "Ingetin - Alarm System", 
+                    JOptionPane.WARNING_MESSAGE);
+                this.setAlwaysOnTop(false);
+            }
     }
     
     public String checkMode(ResultSet rs){

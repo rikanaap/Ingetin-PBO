@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 /**
@@ -29,6 +30,11 @@ public class table_mood extends javax.swing.JFrame {
     
     public table_mood() {
         initComponents();
+          setIconImage(
+            new ImageIcon(
+                getClass().getResource("/Frames/images/IMG_Logo.png")
+            ).getImage()
+        );
         database_mood = new MoodDB();
         tampilSemuaData();
         setUkuranLokasi();

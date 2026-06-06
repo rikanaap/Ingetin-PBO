@@ -7,6 +7,7 @@ package Frames;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 /**
@@ -25,10 +26,16 @@ public class welcome extends javax.swing.JFrame {
     public welcome() {
         initComponents();
         setUkuranLokasi();
+        
+        setIconImage(
+            new ImageIcon(
+                getClass().getResource("/Frames/images/IMG_Logo.png")
+            ).getImage()
+        );
+        
         updateWaktu();
         Timer timer = new Timer(60000, e -> updateWaktu());
         timer.start();
-        KoneksiDB.MesinAlarm.hidupkan();
     }
 
     /**

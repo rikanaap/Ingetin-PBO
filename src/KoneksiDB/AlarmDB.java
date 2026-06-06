@@ -82,7 +82,7 @@ public int cariIDJanji(String teksJanji) {
         }
     }
    
-  public String cekAlarmAktif(String tanggal, int jam, int menit) {
+  public String cekAlarmAktif(int jam, int menit) {
     String filePathMusik = null;
     try {
         String sql = "SELECT a.file_path FROM alarm a " +
@@ -90,7 +90,7 @@ public int cariIDJanji(String teksJanji) {
                      "WHERE j.date = ? AND j.hour = ? AND j.minute = ?";
         
         java.sql.PreparedStatement ps = this.con.prepareStatement(sql);
-        ps.setString(1, tanggal);
+        ps.setString(1, Global.tanggal);
         ps.setInt(2, jam);
         ps.setInt(3, menit);
         

@@ -151,7 +151,9 @@ public class P_CardJanji extends javax.swing.JPanel {
     }//GEN-LAST:event_checkboxActionPerformed
 
     private void BTN_DeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_DeleteMouseClicked
+        System.out.println("ID:" + id);
         database_janji.hapusJanji(id);
+        
         this.setVisible(false);
     }//GEN-LAST:event_BTN_DeleteMouseClicked
 
@@ -163,8 +165,6 @@ public class P_CardJanji extends javax.swing.JPanel {
             L_Alarm.setVisible(false);
             JOptionPane.showMessageDialog(this,"Alarm telah dihapus");
         }
-        
-        
     }//GEN-LAST:event_L_AlarmMouseClicked
 
 

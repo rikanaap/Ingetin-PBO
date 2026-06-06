@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 /**
@@ -29,9 +30,17 @@ public class table_motivasi extends javax.swing.JFrame {
     
     public table_motivasi() {
         initComponents();
+          setIconImage(
+            new ImageIcon(
+                getClass().getResource("/Frames/images/IMG_Logo.png")
+            ).getImage()
+        );
+        
         database_motivasi = new MotivasiDB();
         tampilSemuaData();
         setUkuranLokasi();
+        
+        
         
         updateWaktu();
         Timer timer = new Timer(60000, e -> updateWaktu());

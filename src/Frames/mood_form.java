@@ -30,6 +30,11 @@ public class mood_form extends javax.swing.JFrame {
      */
     public mood_form(int id_mood) {
         initComponents();
+          setIconImage(
+            new ImageIcon(
+                getClass().getResource("/Frames/images/IMG_Logo.png")
+            ).getImage()
+        );
         database_mood = new MoodDB();
         id = id_mood;
         System.out.println(id_mood);

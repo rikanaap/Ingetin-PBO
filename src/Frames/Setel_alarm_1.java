@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Frames;
+import java.io.File;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -19,13 +21,20 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
     private janji Frame_Janji;
     private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MMMM, HH:mm");
     public LocalTime waktu;
+    private boolean isLoadingComboBox = false;
     
     /*Membuka halaman ini di java*/
     public Setel_alarm_1() {
         initComponents();
+          setIconImage(
+            new ImageIcon(
+                getClass().getResource("/Frames/images/IMG_Logo.png")
+            ).getImage()
+        );
  
         database_alarm = new KoneksiDB.AlarmDB(); 
         setJanji(); 
+        setComboBoxAlarm();
         setUkuranLokasi();
         updateWaktu();
         Timer timer = new Timer(60000, e -> updateWaktu());
@@ -46,6 +55,22 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Error saat mengisi JComboBox: " + e.getMessage());
         }
+    }
+    
+    private void setComboBoxAlarm(){
+       
+        CB_Musik.removeAllItems();
+        String[] musik = {
+        "alarm_01.wav",
+        "alarm_02.wav",
+        "alarm_03.wav",
+        "alarm_04.wav"
+        };
+
+        for (String m : musik) {
+            CB_Musik.addItem(m);
+        }
+        isLoadingComboBox = true;
     }
     
     private int ambilIDJanji() {
@@ -266,7 +291,6 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
 
     private void BTN_SetelAlarmActionPerformed(java.awt.event.ActionEvent evt) {                                               
        try {
-            // FIX BUG UTAMA: Mengambil pilihan string dari JComboBox dengan benar, bukan .getText()
             if (CB_Musik.getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(this, "Silakan pilih musik terlebih dahulu!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -274,7 +298,7 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
             
             String musikTerpilih = CB_Musik.getSelectedItem().toString(); 
             // Kita bungkus nama file mentah menjadi full path package resource
-            String pathMusik = "/Musik/" + musikTerpilih; 
+            String pathMusik = "/Frames/music/" + musikTerpilih; 
             
             int idJanji = ambilIDJanji();
             //Validasi kalo lum pilih janji
@@ -304,19 +328,27 @@ public class Setel_alarm_1 extends javax.swing.JFrame {
     private void CB_MusikActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // BONUS FITUR: Putar musik otomatis sebagai preview saat user memilih opsi di ComboBox
         try {
+            if(isLoadingComboBox == false) return;
             if (CB_Musik.getSelectedItem() == null) return;
             
             String musikTerpilih = CB_Musik.getSelectedItem().toString();
-            String pathMusik = "/Musik/" + musikTerpilih; // Sesuaikan dengan nama package musikmu (M kapital/kecil)
+            String pathMusik = "/Frames/music/" + musikTerpilih; // Sesuaikan dengan nama package musikmu (M kapital/kecil)
             java.net.URL url = getClass().getResource(pathMusik);
             
             if (url != null) {
                 javax.sound.sampled.AudioInputStream audioStream = javax.sound.sampled.AudioSystem.getAudioInputStream(url);
                 javax.sound.sampled.Clip clip = javax.sound.sampled.AudioSystem.getClip();
                 clip.open(audioStream);
-                clip.start(); // Test putar musik audio
+                clip.start();
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Alarm sedang berbunyi\nTutup dialog untuk mematikan!"
+                );
+
+                clip.stop();
+                clip.close();
             } else {
-                System.out.println("File musik '" + musikTerpilih + "' tidak ditemukan di folder /Musik/");
+                System.out.println("File musik '" + musikTerpilih + "' tidak ditemukan di folder /Frames/music");
             }
         } catch (Exception e) {
             System.out.println("Gagal memutar preview musik: " + e.getMessage());

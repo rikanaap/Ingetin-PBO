@@ -32,12 +32,11 @@ public class MesinAlarm {
             //Ambil waktu sekarang lalu MAJUIN 1 JAM (+1)
             LocalDateTime waktuMaju = LocalDateTime.now().plusHours(1);
             
-            String tglTarget = waktuMaju.format(fmtDB);
             int jamTarget = waktuMaju.getHour();
             int menitTarget = waktuMaju.getMinute();
             
             //Cek database lewat AlarmDB
-            String pathMusik = db_alarm.cekAlarmAktif(tglTarget, jamTarget, menitTarget);
+            String pathMusik = db_alarm.cekAlarmAktif( jamTarget, menitTarget);
             System.out.println(pathMusik);
             
             //Hasilnya, kalau cocok play musik dan muncul popup

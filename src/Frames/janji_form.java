@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -29,6 +30,11 @@ public class janji_form extends javax.swing.JFrame {
     
     public janji_form() {
         initComponents();
+          setIconImage(
+            new ImageIcon(
+                getClass().getResource("/Frames/images/IMG_Logo.png")
+            ).getImage()
+        );
         
         database_janji = new JanjiDB();
         database_mood = new MoodDB();
